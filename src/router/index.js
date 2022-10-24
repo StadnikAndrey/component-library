@@ -38,7 +38,7 @@ const routes = [
   {
     path: '/input-type-range',
     name: 'InputTypeRange',
-    component: () => import('../views/InputTypeRange.vue')
+    component: () => import('../views/InputTypeRangeView.vue')
   },
   { path: '/:pathMatch(.*)*', name: 'Home', component: Home },
 ]
