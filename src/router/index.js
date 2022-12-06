@@ -40,6 +40,16 @@ const routes = [
     name: 'InputTypeRange',
     component: () => import('../views/InputTypeRangeView.vue')
   },
+  {
+    path: '/markdown-editor',
+    name: 'MarkdownEditor',
+    component: () => import('../views/MarkdownEditorView.vue')
+  },
+  {
+    path: '/ckeditor',
+    name: 'CKEditor',
+    component: () => import('../views/CKEditorView.vue')
+  },
   { path: '/:pathMatch(.*)*', name: 'Home', component: Home },
 ]
 

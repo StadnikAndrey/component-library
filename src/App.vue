@@ -119,7 +119,9 @@ export default {
         { name: "Vue-chartjs", path: "/vue-chartjs" },
         { name: "Table", path: "/table"},
         { name: "Image upload", path: "/image-upload"},
-        { name: "input[type=range]", path: "/input-type-range"}
+        { name: "input[type=range]", path: "/input-type-range"},
+        { name: "Markdown editor", path: "/markdown-editor"},      
+        { name: "CKEditor", path: "/ckeditor"}
       ],
     };
   },
