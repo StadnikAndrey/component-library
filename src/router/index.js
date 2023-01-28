@@ -21,6 +21,11 @@ const routes = [
     component: () => import('../views/CountdownTimer.vue')
   },
   {
+    path: '/countdown-timer-circle',
+    name: 'CountdownTimerCircle',
+    component: () => import('../views/CountDownTimerCircleView.vue')
+  },
+  {
     path: '/vue-chartjs',
     name: 'VueChartjs',
     component: () => import('../views/VueChartjs.vue')

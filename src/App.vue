@@ -116,12 +116,13 @@ export default {
       menu: [
         { name: "Slider/carousel (Splide)", path: "/carousel-splide" },
         { name: "Countdown timer", path: "/countdown-timer" },
+        { name: "Countdown timer circle", path: "/countdown-timer-circle" },
         { name: "Vue-chartjs", path: "/vue-chartjs" },
-        { name: "Table", path: "/table"},
-        { name: "Image upload", path: "/image-upload"},
-        { name: "input[type=range]", path: "/input-type-range"},
-        { name: "Markdown editor", path: "/markdown-editor"},      
-        { name: "CKEditor", path: "/ckeditor"}
+        { name: "Table", path: "/table" },
+        { name: "Image upload", path: "/image-upload" },
+        { name: "input[type=range]", path: "/input-type-range" },
+        { name: "Markdown editor", path: "/markdown-editor" },
+        { name: "CKEditor", path: "/ckeditor" },
       ],
     };
   },
