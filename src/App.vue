@@ -374,7 +374,7 @@ export default {
     margin-bottom: 50px;
   }
   .header__left {
-    padding-left: 50px;
+    margin-left: 50px;
   }
   .main__sidebar {
     position: fixed;
