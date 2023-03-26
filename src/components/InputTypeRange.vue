@@ -1,17 +1,15 @@
 <template>
-  <div class="range">
-    <datalist class="range__list">
-      <option
+  <div class="range">    
+     <div class="range__list">
+      <span
         v-for="item of datalist.options"
         :key="item.value"
         class="range__opt"
-        :class="item.activClass"
-        :value="item.value"
-        :label="item.value + datalist.unit"
+        :class="item.activClass"         
         :style="`--w: ${item.value}; --total: ${datalist.total}; --start: ${datalist.start}`"
         @click="setValueInput($event, item.value)"
-      ></option>
-    </datalist>
+      >{{item.value + datalist.unit}}</span>
+    </div>
     <input
       class="range__input"
       type="range"
@@ -19,15 +17,16 @@
       :min="input.min"
       :max="input.max"
       step=".1"
-      @change="changeValueRange($event)"
+      @input="changeValueRange($event)"
     />
   </div>
+  <div class="range__res">{{res}}</div>
 </template>
 
 <script>
 import { ref } from "vue";
 export default {
-  props: ["values", "unit"],  
+  props: ["values", "unit"],
   setup(props) {
     let datalist = ref({});
     datalist.value = {
@@ -44,7 +43,7 @@ export default {
     };
     datalist.value.unit = props.unit;
     datalist.value.options = [];
-    let valueOptions = props.values;
+    let valueOptions = Array.from(new Set(props.values));
     valueOptions.sort((a, b) => {
       return a - b;
     });
@@ -62,30 +61,55 @@ export default {
     input.value.max = datalist.value.options[last].value;
     datalist.value.total = Math.max(...valueOptions);
     datalist.value.start = datalist.value.options[0].value;
+    let res = ref(datalist.value.options[0].value);
 
-    return { datalist, input };
-  },   
-  methods: {
-    changeValueRange(e) {
+    return { datalist, input, res };
+  },
+  methods: {    
+     changeValueRange(e) {
       let values = Array.from(this.datalist.options).map((o) => o.value);
-      let prevValue = this.input.value;
-      let index = values.findIndex((v) => Number(v) >= Number(prevValue));
-      if (Number(this.input.value) < Number(prevValue)) {
-        index--;
-      }
-      this.input.value = values[index];
+
+      let prevValue = Number(this.input.value);       
+
+      let min = values.find((el, i, arr) => {
+        let maxIndex = arr.findIndex((v) => {
+          return Number(v) >= Number(prevValue);
+        });
+        let checkMaxIndex = maxIndex == 0 ? maxIndex : maxIndex - 1;
+        return Number(el) <= Number(prevValue) && i == checkMaxIndex;
+      });
+      let max = values.find((v, i, arr) => {
+        if (arr.length - 1 === i && Number(v) == Number(prevValue)) {          
+          return Number(v) == Number(prevValue);
+        } else {
+          return Number(v) > Number(prevValue);
+        }
+      });
+      let range = (max - min) / 2;
+      let index = values.findIndex((v) => {
+        if (Number(v) >= min && Number(prevValue) <= Number(v) + range) {
+          return true;
+        } else if (
+          Number(v) > min + range &&
+          Number(prevValue) >= Number(v) + range
+        ) {
+          return true;
+        }
+      });      
+      this.input.value = values[index];      
       prevValue = this.input.value;
-      // подсветка активного значения при передвижении ползунка
+      this.res = prevValue;       
       for (let i = 0; i < this.datalist.options.length; i++) {
         if (this.datalist.options[i].value == this.input.value) {
           this.datalist.options[i].activClass = "range__opt--opted";
         } else {
           this.datalist.options[i].activClass = "";
         }
-      }
+      }      
     },
     setValueInput(e, value) {
       this.input.value = value;
+      this.res = this.input.value;
       for (let i = 0; i < this.datalist.options.length; i++) {
         if (this.datalist.options[i].value == this.input.value) {
           this.datalist.options[i].activClass = "range__opt--opted";
@@ -102,11 +126,13 @@ export default {
 @import "@/assets/css/vars.scss";
 .range {
   position: relative;
+  margin-bottom: 5px;
   &__input {
     width: 100%;
     height: 0;
     margin-top: 45px;
     -webkit-appearance: none;
+    appearance: none;
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 18px;

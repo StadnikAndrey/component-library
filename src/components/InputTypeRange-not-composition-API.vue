@@ -1,70 +1,34 @@
 <template>
   <div class="range">
-    <datalist class="range__list">
-      <option
-        v-for="item of datalist.options"
-        :key="item.value"
-        class="range__opt"
-        :class="item.activClass"
-        :value="item.value"
-        :label="item.value + datalist.unit"
-        :style="`--w: ${item.value}; --total: ${datalist.total}; --start: ${datalist.start}`"
-        @click="setValueInput($event, item.value)"
-      ></option>
-      <!-- <option
-        class="range__opt"
-        value="4"
-        label="4Tb"
-        style="--w: 4; --total: 12; --start: 2"
-      ></option>
-      <option
-        class="range__opt"
-        value="5"
-        label="5Tb"
-        style="--w: 5; --total: 12; --start: 2"
-      ></option>
-      <option
-        class="range__opt"
-        value="8"
-        label="8Tb"
-        style="--w: 8; --total: 12; --start: 2"
-      ></option>
-      <option
-        class="range__opt"
-        value="10"
-        label="10Tb"
-        style="--w: 10; --total: 12; --start: 2"
-      ></option>
-      <option
-        class="range__opt"
-        value="11"
-        label="11Tb"
-        style="--w: 11; --total: 12; --start: 2"
-      ></option>
-      <option
-        class="range__opt"
-        value="12"
-        label="12Tb"
-        style="--w: 12; --total: 12; --start: 2"
-      ></option> -->
-    </datalist>
+    <div class="range__list">
+       <span
+          v-for="item of datalist.options"
+          :key="item.value"
+          class="range__opt"
+          :class="item.activClass"           
+          :style="`--w: ${item.value}; --total: ${datalist.total}; --start: ${datalist.start}`"
+          @click="setValueInput($event, item.value)"
+        >{{item.value + datalist.unit}}</span>
+    </div>
     <input
-      class="range__input inp4"
+      class="range__input"
       type="range"
       v-model="input.value"
       :min="input.min"
       :max="input.max"
       step=".1"
-      @change="changeValueRange($event)"
+      @input="changeValueRange($event)"
     />
   </div>
+  <div class="range__res">{{res}}</div>
 </template>
 
 <script>
 export default {
-  props:['values', 'unit'],
+  props: ["values", "unit"],
   data() {
     return {
+      res: null,
       input: {
         value: 0,
         min: 0,
@@ -74,22 +38,13 @@ export default {
         unit: "",
         total: 0,
         start: 0,
-        options1: [
-          { value: 2, activClass: "range__opt--opted" },
-          { value: 4, activClass: "" },
-          { value: 5, activClass: "" },
-          { value: 8, activClass: "" },
-          { value: 10, activClass: "" },
-          { value: 11, activClass: "" },
-          { value: 12, activClass: "" },
-        ],
         options: [],
       },
     };
   },
   created() {
     this.datalist.unit = this.unit;
-    let valueOptions = this.values;
+    let valueOptions = Array.from(new Set(this.values));  
     valueOptions.sort((a, b) => {
       return a - b;
     });
@@ -107,22 +62,40 @@ export default {
     this.input.max = this.datalist.options[last].value;
     this.datalist.total = Math.max(...valueOptions);
     this.datalist.start = this.datalist.options[0].value;
+    this.res = this.datalist.options[0].value;
   },
   methods: {
     changeValueRange(e) {
       let values = Array.from(this.datalist.options).map((o) => o.value);
-
-      let prevValue = this.input.value;
-
-      // if (!values.includes(this.input.value)) {
-
-      let index = values.findIndex((v) => Number(v) >= Number(prevValue));
-      if (Number(this.input.value) < Number(prevValue)) {
-        index--;
-      }
-      this.input.value = values[index];
-      // }
+      let prevValue = Number(this.input.value);
+      let min = values.find((el, i, arr) => {
+        let maxIndex = arr.findIndex((v) => {
+          return Number(v) >= Number(prevValue);
+        });
+        let checkMaxIndex = maxIndex == 0 ? maxIndex : maxIndex - 1;
+        return Number(el) <= Number(prevValue) && i == checkMaxIndex;
+      });
+      let max = values.find((v, i, arr) => {
+        if (arr.length - 1 === i && Number(v) == Number(prevValue)) {          
+          return Number(v) == Number(prevValue);
+        } else {
+          return Number(v) > Number(prevValue);
+        }
+      });
+      let range = (max - min) / 2;
+      let index = values.findIndex((v) => {
+        if (Number(v) >= min && Number(prevValue) <= Number(v) + range) {
+          return true;
+        } else if (
+          Number(v) > min + range &&
+          Number(prevValue) >= Number(v) + range
+        ) {
+          return true;
+        }
+      });      
+      this.input.value = values[index];      
       prevValue = this.input.value;
+      this.res = prevValue;       
       // подсветка активного значения при передвижении ползунка
       for (let i = 0; i < this.datalist.options.length; i++) {
         if (this.datalist.options[i].value == this.input.value) {
@@ -130,23 +103,11 @@ export default {
         } else {
           this.datalist.options[i].activClass = "";
         }
-      }
-      // });
-      // установка value при клике по зачению на шкале
-      // for (let i = 0; i < optionElems.length; i++) {
-      //   optionElems[i].addEventListener("click", function (e) {
-      //     for (let i = 0; i < optionElems.length; i++) {
-      //       if (optionElems[i].classList.contains(classOpted)) {
-      //         optionElems[i].classList.remove(classOpted);
-      //       }
-      //     }
-      //     input.value = this.value;
-      //     this.classList.add(classOpted);
-      //   });
-      // }
+      }      
     },
     setValueInput(e, value) {
       this.input.value = value;
+      this.res = value;
       for (let i = 0; i < this.datalist.options.length; i++) {
         if (this.datalist.options[i].value == this.input.value) {
           this.datalist.options[i].activClass = "range__opt--opted";
@@ -161,8 +122,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/css/vars.scss";
-.range {
-  position: relative;  
+.range {  
+  position: relative;
+  margin-bottom: 5px;
   // &__input {
   //   width: 100%;
   //   -webkit-appearance: none;
@@ -188,6 +150,7 @@ export default {
     height: 0;
     margin-top: 45px;
     -webkit-appearance: none;
+    appearance: none;
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 18px;
@@ -244,13 +207,7 @@ export default {
     &:focus {
       background: none;
       outline: none;
-    }
-    &::-ms-track {
-      width: 100%;
-      height: 1px;
-      cursor: pointer;
-      background: $grey;
-    }
+    }     
   }
   &__list {
     position: relative;
@@ -278,6 +235,9 @@ export default {
   &__opt--opted {
     color: var(--color-secondary);
     font-size: 21px;
+  }
+  &__res{
+    margin-bottom: 10px;
   }
 }
 </style>

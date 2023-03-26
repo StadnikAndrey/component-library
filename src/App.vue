@@ -123,6 +123,8 @@ export default {
         { name: "input[type=range]", path: "/input-type-range" },
         { name: "Markdown editor", path: "/markdown-editor" },
         { name: "CKEditor", path: "/ckeditor" },
+        { name: "Accordeon", path: "/accordeon" },
+        { name: "Dialog", path: "/dialog" },
       ],
     };
   },

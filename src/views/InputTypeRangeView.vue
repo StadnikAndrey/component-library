@@ -13,6 +13,9 @@
     <div class="range-page__content-item">
       <inputTypeRange :values="inp2.values" :unit="inp2.unit"></inputTypeRange>
     </div>    
+    <div class="range-page__content-item">
+      <inputTypeRange :values="inp3.values" :unit="inp3.unit"></inputTypeRange>
+    </div>
   </div>
 </template>
 
@@ -32,8 +35,12 @@ export default {
       },
       inp2: {
         values: [6, 1, 4, 5, 8, 10, 11, 12],
+        unit: "Mb/s",
+      },
+      inp3: {
+        values: [16, 32, 48, 64, 96, 128, 160, 192],
         unit: "Gb",
-      }        
+      },   
     };
   },
 };

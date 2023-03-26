@@ -55,6 +55,16 @@ const routes = [
     name: 'CKEditor',
     component: () => import('../views/CKEditorView.vue')
   },
+  {
+    path: '/accordeon',
+    name: 'AccordeonView',
+    component: () => import('../views/AccordeonView.vue')
+  },
+  {
+    path: '/dialog',
+    name: 'DialogView',
+    component: () => import('../views/DialogView.vue')
+  },
   { path: '/:pathMatch(.*)*', name: 'Home', component: Home },
 ]
 
