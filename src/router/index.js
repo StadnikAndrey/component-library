@@ -65,6 +65,11 @@ const routes = [
     name: 'DialogView',
     component: () => import('../views/DialogView.vue')
   },
+  {
+    path: '/json-formatter',
+    name: 'JsonFormatter',
+    component: () => import('../views/JsonFormatterView.vue')
+  },
   { path: '/:pathMatch(.*)*', name: 'Home', component: Home },
 ]
 

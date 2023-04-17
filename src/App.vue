@@ -125,6 +125,7 @@ export default {
         { name: "CKEditor", path: "/ckeditor" },
         { name: "Accordeon", path: "/accordeon" },
         { name: "Dialog", path: "/dialog" },
+        { name: "JSON Formatter", path: "/json-formatter" },
       ],
     };
   },
