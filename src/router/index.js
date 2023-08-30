@@ -31,8 +31,18 @@ const routes = [
     component: () => import('../views/VueChartjs.vue')
   },
   {
-    path: '/table',
-    name: 'Table',
+    path: '/table-1',
+    name: 'Table1',
+    component: () => import('../views/Table1.vue')
+  },
+  {
+    path: '/table-2',
+    name: 'Table2',
+    component: () => import('../views/Table2.vue')
+  },
+  {
+    path: '/table-3',
+    name: 'Table3',
     component: () => import('../views/Table3.vue')
   },
   {

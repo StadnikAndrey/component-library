@@ -1,6 +1,6 @@
 <template>
   <div class="table-txt">
-    <p>Table 2 functionality:</p>
+    <p>Table 3 functionality:</p>
     <ul class="table-txt__ul">
       <li>adaptive for different screen sizes: scrolling in two directions</li>
       <li>fixed table header and the first cell of the row</li>
@@ -16,15 +16,25 @@
     class="scrollbar-top"
     :style="scrollBarStyle"
     ref="srollbarRef"
-    @scroll="setScrollTopWrap($event)"
+    @scroll="setWrapTable($event)"
+    tabindex="-1"
+    @focus="focusScrollBarTop"
+    @blur="blurScrollBarTop"
+    @mouseenter="focusScrollBarTop"
+    @mouseleave="blurScrollBarTop"
   >
     <div class="srollbar-top__inner" :style="scrollBarInnerStyle"></div>
   </div>
   <div
     class="wrap-table"
     :class="wrapBgSizeClass"
-    @scroll="setScrollTopScrollbar($event)"
+    @scroll="setScrollbar($event)"
     ref="wrapRef"
+    tabindex="-1"
+    @focus="focusWrapTable"
+    @blur="blurWrapTable"
+    @mouseenter="focusWrapTable"
+    @mouseleave="blurWrapTable"
   >
     <table class="table" ref="tableRef">
       <thead class="t-head-fixed">
@@ -97,6 +107,7 @@ export default {
       table: json,
       scrollBarStyle: {
         width: 0,
+        minHeight: "19px",
       },
       scrollBarInnerStyle: {
         width: 0,
@@ -105,6 +116,16 @@ export default {
       },
       initResize: true,
       wrapBgSizeClass: "",
+
+      wrapScrollLeftPosition: 0,
+      scrollbarScrollLeftPosition: 0,
+      resizeTimeoutID: null,
+      allowSetScrollbar: true,
+      allowSetWrapTable: true,
+      setScrollbarTimeoutID: null,
+      setWrapTableTimeoutID: null,
+      scrollbarTopFocus: false,
+      wrapTableFocus: false,
     };
   },
   mounted() {
@@ -112,14 +133,15 @@ export default {
     window.addEventListener("resize", () => {
       if (this.initResize) {
         this.initResize = false;
-        setTimeout(() => {
+        clearTimeout(this.resizeTimeoutID);
+        this.resizeTimeoutID = setTimeout(() => {
           this.init();
           this.initResize = true;
         }, 1000);
       }
     });
   },
-  updated() {    
+  updated() {
     this.init();
   },
   unmounted() {
@@ -153,19 +175,6 @@ export default {
       let table = this.$refs.tableRef;
       this.scrollBarStyle.width = wrap.clientWidth + borderWidth * 2 + "px";
       this.scrollBarInnerStyle.width = table.offsetWidth + "px";
-
-      // console.log(
-      //   wrap.clientWidth,
-      //   wrap.offsetWidth,
-      //   wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2),
-      //   borderWidth
-      // );
-      // console.log(
-      //   "exist vertical scrollbar ",
-      //   wrap.offsetHeight,
-      //   table.offsetHeight,
-      //   wrap.offsetHeight < table.offsetHeight
-      // );
       // если есть вертикальный скроллбар (высота таблицы больше высоты контейнера (задана высота контейнера))
       let widthVerticalScrollbar =
         wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2);
@@ -180,13 +189,61 @@ export default {
         this.wrapBgSizeClass = "wrap-table--without-scrollbar";
       }
     },
-    setScrollTopWrap(e) {
-      let wrap = this.$refs.wrapRef;
-      wrap.scrollLeft = e.target.scrollLeft;
+    setWrapTable(e) {
+      if (this.scrollbarTopFocus) {
+        let st = e.target.scrollLeft;
+        // check gorizontal scroll
+        if (
+          st > this.scrollbarScrollLeftPosition ||
+          st < this.scrollbarScrollLeftPosition
+        ) {
+          if (this.allowSetWrapTable) {
+            this.allowSetWrapTable = false;
+            clearTimeout(this.setWrapTableTimeoutID);
+            this.setWrapTableTimeoutID = setTimeout(() => {
+              let wrap = this.$refs.wrapRef;
+              wrap.scrollLeft = e.target.scrollLeft;
+              this.allowSetWrapTable = true;
+              console.log("setWrapTable");
+            }, 500);
+          }
+        }
+        this.scrollbarScrollLeftPosition = st;
+      }
     },
-    setScrollTopScrollbar(e) {
-      let srollbar = this.$refs.srollbarRef;
-      srollbar.scrollLeft = e.target.scrollLeft;
+    setScrollbar(e) {
+      if (this.wrapTableFocus) {
+        let st = e.target.scrollLeft;
+        // check gorizontal scroll
+        if (
+          st > this.wrapScrollLeftPosition ||
+          st < this.wrapScrollLeftPosition
+        ) {
+          if (this.allowSetScrollbar) {
+            this.allowSetScrollbar = false;
+            clearTimeout(this.setScrollbarTimeoutID);
+            this.setScrollbarTimeoutID = setTimeout(() => {
+              let srollbar = this.$refs.srollbarRef;
+              srollbar.scrollLeft = e.target.scrollLeft;
+              this.allowSetScrollbar = true;
+              console.log("setScrollbar");
+            }, 50);
+          }
+        }
+        this.wrapScrollLeftPosition = st;
+      }
+    },
+    focusScrollBarTop() {
+      this.scrollbarTopFocus = true;
+    },
+    focusWrapTable() {
+      this.wrapTableFocus = true;
+    },
+    blurScrollBarTop() {
+      this.scrollbarTopFocus = false;
+    },
+    blurWrapTable() {
+      this.wrapTableFocus = false;
     },
   },
 };
@@ -264,6 +321,9 @@ li {
   //   background-color: #ccc;
   //   border-radius: 20px;
   // }
+  &:focus-visible{
+    outline: none !important;
+  }
 }
 
 .table {

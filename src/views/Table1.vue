@@ -1,6 +1,6 @@
 <template>
   <div class="table-txt">
-    <p>Table functionality:</p>
+    <p>Table 1 functionality:</p>
     <ul class="table-txt__ul">
       <li>adaptive for different screen sizes: scrolling in two directions</li>
       <li>fixed table header and the first cell of the row</li>
