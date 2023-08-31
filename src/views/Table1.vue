@@ -82,28 +82,6 @@ export default {
       table: json,
     };
   },
-  mounted() {},
-  methods: {
-    tree(value) {
-      let res = "";
-      if (typeof value == "string" || typeof value == "number") {
-        res = value;
-      } else if (Array.isArray(value)) {
-        res = `<ul>`;
-        for (const item of value) {
-          res = res + `<li> ${this.tree(item)} </li>`;
-        }
-        res = res + `</ul>`;
-      } else {
-        res = `<ul>`;
-        for (const key in value) {
-          res = res + `<li>${key} : ${this.tree(value[key])} </li>`;
-        }
-        res = res + `</ul>`;
-      }
-      return res;
-    },
-  },
 };
 </script>
 <style lang="scss" scoped>
@@ -131,7 +109,7 @@ li {
   padding: 2px 0;
 }
 ////////////////////////
-.wrap-table {  
+.wrap-table {
   overflow: auto;
   max-width: fit-content;
   max-height: 65vh;
@@ -155,7 +133,7 @@ li {
 }
 
 .table {
-  table-layout: fixed;   
+  table-layout: fixed;
   border-spacing: 0;
   margin: 0;
   color: #000;

@@ -140,24 +140,26 @@ export default {
   methods: {
     init() {
       let wrap = this.$refs.wrapRef;
-      let borderWidth = parseFloat(
-        window.getComputedStyle(wrap)["border-width"]
-      );
-      let table = this.$refs.tableRef;
-      this.scrollBarStyle.width = wrap.clientWidth + borderWidth * 2 + "px";
-      this.scrollBarInnerStyle.width = table.offsetWidth + "px";
-      // if there is a vertical scrollbar (table height is greater than container height (container height is set))
-      let widthVerticalScrollbar =
-        wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2);
-      if (table.offsetHeight > wrap.offsetHeight) {
-        // if the scrollbar is of standard width (~16px) (not mobile, not ubuntu, ...)
-        if (widthVerticalScrollbar > 14) {
-          this.wrapBgSizeClass = "wrap-table--with-scrollbar";
+      if (wrap) {
+        let borderWidth = parseFloat(
+          window.getComputedStyle(wrap)["border-width"]
+        );
+        let table = this.$refs.tableRef;
+        this.scrollBarStyle.width = wrap.clientWidth + borderWidth * 2 + "px";
+        this.scrollBarInnerStyle.width = table.offsetWidth + "px";
+        // if there is a vertical scrollbar (table height is greater than container height (container height is set))
+        let widthVerticalScrollbar =
+          wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2);
+        if (table.offsetHeight > wrap.offsetHeight) {
+          // if the scrollbar is of standard width (~16px) (not mobile, not ubuntu, ...)
+          if (widthVerticalScrollbar > 14) {
+            this.wrapBgSizeClass = "wrap-table--with-scrollbar";
+          } else {
+            this.wrapBgSizeClass = "wrap-table--without-scrollbar";
+          }
         } else {
           this.wrapBgSizeClass = "wrap-table--without-scrollbar";
         }
-      } else {
-        this.wrapBgSizeClass = "wrap-table--without-scrollbar";
       }
     },
     setWrapTable(e) {
