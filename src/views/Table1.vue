@@ -106,7 +106,7 @@ export default {
   },
 };
 </script>
-<style  lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/css/vars.scss";
 .table-txt {
   margin-bottom: 25px;
@@ -191,7 +191,7 @@ li {
   background-color: #fff;
 }
 .table tr:hover {
-  background-color: rgb(175 205 167) !important;
+  background-color: rgb(188, 218, 226) !important;
 }
 
 /* Fixed Headers */

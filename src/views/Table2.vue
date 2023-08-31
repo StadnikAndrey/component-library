@@ -5,21 +5,13 @@
       <li>adaptive for different screen sizes: scrolling in two directions</li>
       <li>fixed table header and the first cell of the row</li>
       <li>table width - by content</li>
-      <li>top scrollbar</li>
+      <li>CSS Scroll Shadows</li>
     </ul>
   </div>
 
   <h2 class="table-title">Table</h2>
 
-  <div
-    class="scrollbar-top"
-    :style="scrollBarStyle"
-    ref="srollbarRef"
-    @scroll="setScrollTopWrap($event)"
-  >
-    <div class="srollbar-top__inner" :style="scrollBarInnerStyle"></div>     
-  </div>
-  <div class="wrap-table" @scroll="setScrollTopScrollbar($event)" ref="wrapRef">
+  <div class="wrap-table" :class="wrapBgSizeClass" ref="wrapRef">
     <table class="table" ref="tableRef">
       <thead class="t-head-fixed">
         <tr>
@@ -76,7 +68,7 @@
           <td>{{ row.ein }}</td>
           <td>{{ row.ssn }}</td>
         </tr>
-      </tbody>      
+      </tbody>
     </table>
   </div>
 </template>
@@ -89,74 +81,55 @@ export default {
   data() {
     return {
       table: json,
-      scrollBarStyle: {
-         width: 0,
-      },
-      scrollBarInnerStyle: {
-        width: 0,
-        height: "1px",
-        opacity: 0
-      },
-      initResize: true
+      initResize: true,
+      wrapBgSizeClass: "",
+      resizeTimeoutID: null,
     };
   },
   mounted() {
     this.init();
-    window.addEventListener("resize", () => {       
+    window.addEventListener("resize", () => {
       if (this.initResize) {
         this.initResize = false;
-        setTimeout(() => {           
+        clearTimeout(this.resizeTimeoutID);
+        this.resizeTimeoutID = setTimeout(() => {
           this.init();
           this.initResize = true;
         }, 1000);
       }
-    });    
+    });
   },
-  updated() {     
-    this.init();     
+  updated() {
+    this.init();
   },
-  unmounted(){
+  unmounted() {
     window.removeEventListener("resize", this.init);
   },
   methods: {
-    tree(value) {
-      let res = "";
-      if (typeof value == "string" || typeof value == "number") {
-        res = value;
-      } else if (Array.isArray(value)) {
-        res = `<ul>`;
-        for (const item of value) {
-          res = res + `<li> ${this.tree(item)} </li>`;
-        }
-        res = res + `</ul>`;
-      } else {
-        res = `<ul>`;
-        for (const key in value) {
-          res = res + `<li>${key} : ${this.tree(value[key])} </li>`;
-        }
-        res = res + `</ul>`;
-      }
-      return res;
-    },
     init() {
       let wrap = this.$refs.wrapRef;
-      let borderWidth = parseFloat(window.getComputedStyle(wrap)["border-width"]);     
+      let borderWidth = parseFloat(
+        window.getComputedStyle(wrap)["border-width"]
+      );
       let table = this.$refs.tableRef;
-      this.scrollBarStyle.width = (wrap.clientWidth + (borderWidth * 2)) + "px";
-      this.scrollBarInnerStyle.width = table.offsetWidth + "px";       
-    },
-    setScrollTopWrap(e) {
-      let wrap = this.$refs.wrapRef;
-      wrap.scrollLeft = e.target.scrollLeft;
-    },
-    setScrollTopScrollbar(e) {
-      let srollbar = this.$refs.srollbarRef;
-      srollbar.scrollLeft = e.target.scrollLeft;
+      // if there is a vertical scrollbar (table height is greater than container height (container height is set))
+      let widthVerticalScrollbar =
+        wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2);
+      if (table.offsetHeight > wrap.offsetHeight) {
+        // if the scrollbar is of standard width (~16px) (not mobile, not ubuntu, ...)
+        if (widthVerticalScrollbar > 14) {
+          this.wrapBgSizeClass = "wrap-table--with-scrollbar";
+        } else {
+          this.wrapBgSizeClass = "wrap-table--without-scrollbar";
+        }
+      } else {
+        this.wrapBgSizeClass = "wrap-table--without-scrollbar";
+      }
     },
   },
 };
 </script>
-<style  lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/css/vars.scss";
 .table-txt {
   margin-bottom: 25px;
@@ -180,9 +153,8 @@ ul ul {
 li {
   padding: 2px 0;
 }
-////////////////////////
-.wrap-table,
-.scrollbar-top {
+//////////////////////// 
+.wrap-table {
   overflow: auto;
   max-width: fit-content;
   max-height: 65vh;
@@ -191,31 +163,52 @@ li {
 
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
-  background-color: var(--color-bg);
-  // &::-webkit-scrollbar {
-  //   width: 8px;
-  //   height: 8px;
-  // }
-  // &::-webkit-scrollbar-track {
-  //   background: rgb(241, 239, 239);
-  // }
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgb(241, 239, 239);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 20px;
+  }
 
-  // &::-webkit-scrollbar-thumb {
-  //   background-color: #ccc;
-  //   border-radius: 20px;
-  // }
+  background: linear-gradient(to right, #fff 30%, rgba(255, 255, 255, 0)),
+    linear-gradient(to right, rgba(255, 255, 255, 0), #fff 70%) 0 100%,
+    radial-gradient(
+      farthest-side at 0% 50%,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0)
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 92%,
+      rgb(225 227 230) 95%,
+      rgba(173, 176, 180, 1) 98%,
+      rgba(144, 144, 148, 1) 99%
+    );
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-position: 0 0, 100%, 0 0, 100% 100%;
+  background-attachment: local, local, scroll, scroll;
+  &--with-scrollbar {
+    background-size: 40px 100%, 40px 100%, 14px 100%, 450px 100%;
+  }
+  &--without-scrollbar {
+    background-size: 40px 100%, 40px 100%, 14px 100%, 170px 100%;
+  }
 }
 
 .table {
-  table-layout: fixed;
   border-spacing: 0;
   margin: 0;
   color: #000;
 }
-
 .table th,
 .table td {
-  padding: 5px;
+  padding: 10px;
   vertical-align: middle;
   text-align: left;
   border: 1px solid #d6d6d6;
@@ -226,35 +219,28 @@ li {
   background-color: #666;
   color: #fff;
 }
-
 .table tr:nth-child(even) td[scope="row"] {
-  background-color: inherit;
+  background-color: #e5e5e5;
 }
-
 .table tr:nth-child(odd) td[scope="row"] {
-  background-color: inherit;
+  background-color: rgba(255, 255, 255, 1);
 }
-
 .table tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: rgba(0, 0, 0, 0.1);
 }
-
 .table tr:nth-child(odd) {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0);
 }
 .table tr:hover {
-  background-color: rgb(175 205 167) !important;
+  background-color: rgb(204, 205, 167) !important;
 }
-
 /* Fixed Headers */
-
 thead.t-head-fixed {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: map-get($zindex, t_head_fixed);
 }
-
 td[scope="row"],
 th[scope="row"] {
   position: -webkit-sticky;
@@ -263,5 +249,4 @@ th[scope="row"] {
   z-index: map-get($zindex, scope_row);
   border-right: 2px solid rgb(175 205 167);
 }
- 
 </style>

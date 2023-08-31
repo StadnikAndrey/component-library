@@ -158,7 +158,7 @@ export default {
   },
 };
 </script>
-<style  lang="scss">
+<style lang="scss" scoped>
 .table-txt {
   margin-bottom: 25px;
   &__ul {

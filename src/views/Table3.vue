@@ -5,37 +5,37 @@
       <li>adaptive for different screen sizes: scrolling in two directions</li>
       <li>fixed table header and the first cell of the row</li>
       <li>table width - by content</li>
-      <li>top scrollbar</li>
       <li>CSS Scroll Shadows</li>
+      <li>top scrollbar (may be hidden by browser, operating system)</li>       
     </ul>
   </div>
 
   <h2 class="table-title">Table</h2>
-
   <div
     class="scrollbar-top"
     :style="scrollBarStyle"
-    ref="srollbarRef"
+    ref="scrollbarRef"
     @scroll="setWrapTable($event)"
-    tabindex="-1"
-    @focus="focusScrollBarTop"
-    @blur="blurScrollBarTop"
-    @mouseenter="focusScrollBarTop"
-    @mouseleave="blurScrollBarTop"
+    @pointerenter="focusScrollBarTop"
   >
-    <div class="srollbar-top__inner" :style="scrollBarInnerStyle"></div>
+    <!-- @pointerleave="blurScrollBarTop"
+  tabindex="-1"
+  @focus="focusScrollBarTop"
+  @blur="blurScrollBarTop" -->
+    <div class="scrollbar-top__inner" :style="scrollBarInnerStyle"></div>
   </div>
+
   <div
     class="wrap-table"
     :class="wrapBgSizeClass"
     @scroll="setScrollbar($event)"
     ref="wrapRef"
-    tabindex="-1"
-    @focus="focusWrapTable"
-    @blur="blurWrapTable"
-    @mouseenter="focusWrapTable"
-    @mouseleave="blurWrapTable"
+    @pointerenter="focusWrapTable"
   >
+    <!-- @pointerleave="blurWrapTable"
+  tabindex="-1"
+  @focus="focusWrapTable"
+  @blur="blurWrapTable" -->
     <table class="table" ref="tableRef">
       <thead class="t-head-fixed">
         <tr>
@@ -107,12 +107,10 @@ export default {
       table: json,
       scrollBarStyle: {
         width: 0,
-        minHeight: "19px",
       },
       scrollBarInnerStyle: {
         width: 0,
         height: "1px",
-        opacity: 0,
       },
       initResize: true,
       wrapBgSizeClass: "",
@@ -147,26 +145,7 @@ export default {
   unmounted() {
     window.removeEventListener("resize", this.init);
   },
-  methods: {
-    tree(value) {
-      let res = "";
-      if (typeof value == "string" || typeof value == "number") {
-        res = value;
-      } else if (Array.isArray(value)) {
-        res = `<ul>`;
-        for (const item of value) {
-          res = res + `<li> ${this.tree(item)} </li>`;
-        }
-        res = res + `</ul>`;
-      } else {
-        res = `<ul>`;
-        for (const key in value) {
-          res = res + `<li>${key} : ${this.tree(value[key])} </li>`;
-        }
-        res = res + `</ul>`;
-      }
-      return res;
-    },
+  methods: {    
     init() {
       let wrap = this.$refs.wrapRef;
       let borderWidth = parseFloat(
@@ -175,11 +154,11 @@ export default {
       let table = this.$refs.tableRef;
       this.scrollBarStyle.width = wrap.clientWidth + borderWidth * 2 + "px";
       this.scrollBarInnerStyle.width = table.offsetWidth + "px";
-      // если есть вертикальный скроллбар (высота таблицы больше высоты контейнера (задана высота контейнера))
+      // if there is a vertical scrollbar (table height is greater than container height (container height is set))
       let widthVerticalScrollbar =
         wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2);
       if (table.offsetHeight > wrap.offsetHeight) {
-        // если скроллбар стандартной ширины (~16px) (не моб. устр., не ubuntu, ...)
+        // if the scrollbar is of standard width (~16px) (not mobile, not ubuntu, ...)
         if (widthVerticalScrollbar > 14) {
           this.wrapBgSizeClass = "wrap-table--with-scrollbar";
         } else {
@@ -205,7 +184,7 @@ export default {
               wrap.scrollLeft = e.target.scrollLeft;
               this.allowSetWrapTable = true;
               console.log("setWrapTable");
-            }, 500);
+            }, 50);
           }
         }
         this.scrollbarScrollLeftPosition = st;
@@ -223,7 +202,7 @@ export default {
             this.allowSetScrollbar = false;
             clearTimeout(this.setScrollbarTimeoutID);
             this.setScrollbarTimeoutID = setTimeout(() => {
-              let srollbar = this.$refs.srollbarRef;
+              let srollbar = this.$refs.scrollbarRef;
               srollbar.scrollLeft = e.target.scrollLeft;
               this.allowSetScrollbar = true;
               console.log("setScrollbar");
@@ -235,20 +214,16 @@ export default {
     },
     focusScrollBarTop() {
       this.scrollbarTopFocus = true;
+      this.wrapTableFocus = false;
     },
     focusWrapTable() {
       this.wrapTableFocus = true;
-    },
-    blurScrollBarTop() {
       this.scrollbarTopFocus = false;
-    },
-    blurWrapTable() {
-      this.wrapTableFocus = false;
-    },
+    }    
   },
 };
 </script>
-<style  lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/css/vars.scss";
 .table-txt {
   margin-bottom: 25px;
@@ -273,14 +248,11 @@ li {
   padding: 2px 0;
 }
 ////////////////////////
-.wrap-table,
-.scrollbar-top {
+.wrap-table {
   overflow: auto;
   max-width: fit-content;
   max-height: 65vh;
-  border: 2px solid #d6d6d6;
-  margin-bottom: 5px;
-
+  // border: 2px solid #d6d6d6;
   background: linear-gradient(to right, #fff 30%, rgba(255, 255, 255, 0)),
     linear-gradient(to right, rgba(255, 255, 255, 0), #fff 70%) 0 100%,
     radial-gradient(
@@ -296,9 +268,7 @@ li {
       rgba(144, 144, 148, 1) 99%
     );
   background-repeat: no-repeat;
-  background-color: #fff;
-  // background-size: 40px 100%, 40px 100%, 14px 100%, 380px 100%; //with scrollbar
-  // background-size: 40px 100%, 40px 100%, 14px 100%, 245px 100%; // without scrollbar
+  background-color: #fff;  
   background-position: 0 0, 100%, 0 0, 100% 100%;
   background-attachment: local, local, scroll, scroll;
   &--with-scrollbar {
@@ -321,13 +291,27 @@ li {
   //   background-color: #ccc;
   //   border-radius: 20px;
   // }
-  &:focus-visible{
-    outline: none !important;
-  }
+}
+.scrollbar-top {
+  overflow: auto;
+  max-width: fit-content;
+
+  // scrollbar-width: thin;
+  // &::-webkit-scrollbar {
+  //   width: 8px;
+  //   height: 8px;
+  // }
+  // &::-webkit-scrollbar-track {
+  //   background: rgb(241, 239, 239);
+  // }
+
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #ccc;
+  //   border-radius: 20px;
+  // }
 }
 
-.table {
-  table-layout: fixed;
+.table {   
   border-spacing: 0;
   margin: 0;
   color: #000;
@@ -339,8 +323,7 @@ li {
   vertical-align: middle;
   text-align: left;
   border: 1px solid #d6d6d6;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: nowrap;   
 }
 .table th {
   background-color: #666;
