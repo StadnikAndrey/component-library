@@ -6,7 +6,7 @@
       <li>fixed table header and the first cell of the row</li>
       <li>table width - by content</li>
       <li>CSS Scroll Shadows</li>
-      <li>top scrollbar (may be hidden by browser, operating system)</li>       
+      <li>top scrollbar (may be hidden by browser, operating system)</li>
     </ul>
   </div>
 
@@ -18,10 +18,6 @@
     @scroll="setWrapTable($event)"
     @pointerenter="focusScrollBarTop"
   >
-    <!-- @pointerleave="blurScrollBarTop"
-  tabindex="-1"
-  @focus="focusScrollBarTop"
-  @blur="blurScrollBarTop" -->
     <div class="scrollbar-top__inner" :style="scrollBarInnerStyle"></div>
   </div>
 
@@ -32,10 +28,6 @@
     ref="wrapRef"
     @pointerenter="focusWrapTable"
   >
-    <!-- @pointerleave="blurWrapTable"
-  tabindex="-1"
-  @focus="focusWrapTable"
-  @blur="blurWrapTable" -->
     <table class="table" ref="tableRef">
       <thead class="t-head-fixed">
         <tr>
@@ -145,7 +137,7 @@ export default {
   unmounted() {
     window.removeEventListener("resize", this.init);
   },
-  methods: {    
+  methods: {
     init() {
       let wrap = this.$refs.wrapRef;
       let borderWidth = parseFloat(
@@ -219,7 +211,7 @@ export default {
     focusWrapTable() {
       this.wrapTableFocus = true;
       this.scrollbarTopFocus = false;
-    }    
+    },
   },
 };
 </script>
@@ -252,7 +244,6 @@ li {
   overflow: auto;
   max-width: fit-content;
   max-height: 65vh;
-  // border: 2px solid #d6d6d6;
   background: linear-gradient(to right, #fff 30%, rgba(255, 255, 255, 0)),
     linear-gradient(to right, rgba(255, 255, 255, 0), #fff 70%) 0 100%,
     radial-gradient(
@@ -268,7 +259,7 @@ li {
       rgba(144, 144, 148, 1) 99%
     );
   background-repeat: no-repeat;
-  background-color: #fff;  
+  background-color: #fff;
   background-position: 0 0, 100%, 0 0, 100% 100%;
   background-attachment: local, local, scroll, scroll;
   &--with-scrollbar {
@@ -310,54 +301,45 @@ li {
   //   border-radius: 20px;
   // }
 }
-
-.table {   
+.table {
   border-spacing: 0;
   margin: 0;
   color: #000;
 }
-
 .table th,
 .table td {
   padding: 15px;
   vertical-align: middle;
   text-align: left;
   border: 1px solid #d6d6d6;
-  white-space: nowrap;   
+  white-space: nowrap;
 }
 .table th {
   background-color: #666;
   color: #fff;
 }
-
 .table tr:nth-child(even) td[scope="row"] {
   background-color: #e5e5e5;
 }
-
 .table tr:nth-child(odd) td[scope="row"] {
   background-color: rgba(255, 255, 255, 1);
 }
-
 .table tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.1);
 }
-
 .table tr:nth-child(odd) {
   background-color: rgba(255, 255, 255, 0);
 }
 .table tr:hover {
   background-color: rgb(175 205 167) !important;
 }
-
 /* Fixed Headers */
-
 thead.t-head-fixed {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: map-get($zindex, t_head_fixed);
 }
-
 td[scope="row"],
 th[scope="row"] {
   position: -webkit-sticky;
