@@ -11,7 +11,7 @@
 
   <h2 class="table-title">Table</h2>
 
-  <div class="wrap-table" :class="wrapBgSizeClass" ref="wrapRef">
+  <div class="wrap-table" :class="wrapTableClass" ref="wrapRef">
     <table class="table" ref="tableRef">
       <thead class="t-head-fixed">
         <tr>
@@ -81,20 +81,20 @@ export default {
   data() {
     return {
       table: json,
-      initResize: true,
-      wrapBgSizeClass: "",
+      allowInitResize: true,
+      wrapTableClass: "",
       resizeTimeoutID: null,
     };
   },
   mounted() {
     this.init();
     window.addEventListener("resize", () => {
-      if (this.initResize) {
-        this.initResize = false;
+      if (this.allowInitResize) {
+        this.allowInitResize = false;
         clearTimeout(this.resizeTimeoutID);
         this.resizeTimeoutID = setTimeout(() => {
           this.init();
-          this.initResize = true;
+          this.allowInitResize = true;
         }, 1000);
       }
     });
@@ -119,12 +119,12 @@ export default {
         if (table.offsetHeight > wrap.offsetHeight) {
           // if the scrollbar is of standard width (~16px) (not mobile, not ubuntu, ...)
           if (widthVerticalScrollbar > 14) {
-            this.wrapBgSizeClass = "wrap-table--with-scrollbar";
+            this.wrapTableClass = "wrap-table--with-scrollbar";
           } else {
-            this.wrapBgSizeClass = "wrap-table--without-scrollbar";
+            this.wrapTableClass = "wrap-table--without-scrollbar";
           }
         } else {
-          this.wrapBgSizeClass = "wrap-table--without-scrollbar";
+          this.wrapTableClass = "wrap-table--without-scrollbar";
         }
       }
     },
