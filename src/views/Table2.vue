@@ -6,6 +6,7 @@
       <li>fixed table header and the first cell of the row</li>
       <li>table width - by content</li>
       <li>CSS Scroll Shadows</li>
+      <li>dark and light theme for the table implemented with filter CSS</li>
     </ul>
   </div>
 
@@ -234,7 +235,7 @@ li {
   background-color: rgba(255, 255, 255, 0);
 }
 .table tr:hover {
-  background-color: rgb(204, 205, 167) !important;
+  background-color: #b5c5c5 !important;
 }
 /* Fixed Headers */
 thead.t-head-fixed {
@@ -250,5 +251,9 @@ th[scope="row"] {
   left: 0;
   z-index: map-get($zindex, scope_row);
   border-right: 2px solid rgb(175 205 167);
+}
+
+.dark .wrap-table {
+  filter: invert(100) hue-rotate(180deg);
 }
 </style>
