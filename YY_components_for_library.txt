@@ -1,6 +1,5 @@
-Функциональность:
-+ живой поиск по компонентам в боковой панели
-- использование option и composition API
+Functionality:
++ live component search in sidebar 
 
 +1. Carousel
 +2. Сharts, diagrams
@@ -26,19 +25,19 @@
 22. Menu (Narbut)
 23. Masondry
 24. Star rating
-+25. input[type=range] с выбором пропорциональных и не пропорциональных значений (СДЕЛАН В DT-VUE)
-+26. Загрузка img на сервер: под input отобразить превью, название, возможность удаления 
++25. input[type=range] with a choice of proportional and non-proportional values
++26. Uploading img to the server: display preview, title, delete option under input 
 27. Audio player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
 28. Video player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
 29. Notifications (example: Slack)
-+30. Загрузка большого файла на сервер (реализован в blog-nuxt)
-31. Select с поиском
+30.  
+31. Select with search
 32. Tabs
 +33. Сountdown timer circle
 34. Drag&Drop
-35. Running numbers (number counter) (in prokachay shool)
+35. Running numbers (number counter)  
 +36. Accordion
 +37. JSON formatter
-38. Уведомления в виде всплывающих сообщений в правом верхнем углу (blog-nuxt)
-39. Функция перевода числа в число прописью
-40. Кастомный скроллбар
+38.  
+39. The function of converting a number to a number in words
+40. Custom scrollbar
