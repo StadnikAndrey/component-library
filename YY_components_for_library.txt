@@ -41,3 +41,62 @@ Functionality:
 38.  
 39. The function of converting a number to a number in words
 40. Custom scrollbar
+
+
+для border между td, th в 1px:
+    -- .table {
+            border-spacing: 0;
+            border-collapse: initial !important;
+            margin: 0;
+            color: #000;
+        }
+    -- для .table th, .table td убрать overflow: hidden; border: 1px solid #d6d6d6;
+    -- для выделения при наведении фикс. ячейки:
+        .table tr:hover td[scope=row] {
+            background-color: #B5C5C5 !important;
+        }
+    -- для td[scope="row"], th[scope="row"] убрать border-right: 2px solid rgb(175 205 167);
+    -- добавить стили:
+        .table thead tr:first-child th:first-child {
+            border-left: 1px solid #d6d6d6;
+            border-top: 1px solid #d6d6d6;
+            border-bottom: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+        }
+        .table thead tr:first-child th {
+            border-top: 1px solid #d6d6d6;
+        }
+        .table thead tr:not(:first-child) th:first-child {
+            border-left: 1px solid #d6d6d6;
+            border-bottom: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+        }
+        .table thead tr th:not(:first-child) {
+            border-bottom: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+        }
+        .table tbody tr:first-child td:first-child {
+            border-left: 1px solid #d6d6d6;
+            border-bottom: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+        }
+        .table tbody tr:not(:first-child) td:first-child {
+            border-left: 1px solid #d6d6d6;
+            border-bottom: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+        }
+        .table tbody tr td:not(:first-child) {
+            border-bottom: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+        }
+        td[scope="row"]::after,
+        th[scope="row"]::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -4px;
+            bottom: 0;
+            width: 4px;
+            background-color: green;
+        }
+        

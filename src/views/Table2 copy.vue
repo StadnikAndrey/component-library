@@ -17,10 +17,10 @@
       <thead class="t-head-fixed">
         <tr>
           <th>name</th>
-          <th>maidenName</th>
+          <th scope="row">maidenName</th>
           <th>age</th>
           <th>gender</th>
-          <th scope="row">email</th>
+          <th>email</th>
           <th>phone</th>
           <th>username</th>
           <th>birthDate</th>
@@ -45,10 +45,10 @@
       <tbody>
         <tr v-for="(row, index) in table" :key="index">
           <td>{{ row.firstName }} {{ row.lastName }}</td>
-          <td>{{ row.maidenName }}</td>
+          <td scope="row">{{ row.maidenName }}</td>
           <td>{{ row.age }}</td>
           <td>{{ row.gender }}</td>
-          <td scope="row">{{ row.email }}</td>
+          <td>{{ row.email }}</td>
           <td>{{ row.phone }}</td>
           <td>{{ row.username }}</td>
           <td>{{ row.birthDate }}</td>
@@ -204,9 +204,8 @@ li {
   }
 }
 
-.table {
-  border-spacing: 0;
-  border-collapse: initial;
+.table {  
+  border-collapse: collapse;
   margin: 0;
   color: #000;
 }
@@ -215,9 +214,8 @@ li {
   padding: 10px;
   vertical-align: middle;
   text-align: left;
-  // border: 4px solid #d6d6d6;
+  border: 1px solid #d6d6d6;
   white-space: nowrap;
-  // overflow: hidden;
 }
 .table th {
   background-color: #666;
@@ -237,9 +235,9 @@ li {
 }
 .table tr:hover {
   background-color: #b5c5c5 !important;
-}
-.table tr:hover td[scope="row"] {
-  background-color: #b5c5c5 !important;
+  & td[scope="row"] {
+    background-color: #b5c5c5 !important;
+  }
 }
 /* Fixed Headers */
 thead.t-head-fixed {
@@ -248,127 +246,43 @@ thead.t-head-fixed {
   top: 0;
   z-index: map-get($zindex, t_head_fixed);
 }
+thead.t-head-fixed::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #666;
+}
 td[scope="row"],
 th[scope="row"] {
   position: -webkit-sticky;
   position: sticky;
   left: 0;
-  z-index: map-get($zindex, scope_row);
-  // border-right: 4px solid rgb(175 205 167) !important;
+  z-index: map-get($zindex, scope_row);   
 }
-
-.dark .wrap-table {
-  filter: invert(100) hue-rotate(180deg);
-}
-// ---------------------------------------------------------------
-// .table thead tr:first-child th:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-top: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table thead tr:first-child th {
-//   border-top: 1px solid #d6d6d6;
-// }
-// .table thead tr:not(:first-child) th:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table thead tr th:not(:first-child) {
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table tbody tr:first-child td:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table tbody tr:not(:first-child) td:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table tbody tr td:not(:first-child) {
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// -----------------------------------------------------------------
-// .table thead tr:first-child th:first-child {
-//   border-left: 4px solid red;
-//   border-top: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table thead tr:first-child th {
-//   border-top: 4px solid red;
-// }
-// .table thead tr:not(:first-child) th:first-child {
-//   border-left: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table thead tr th:not(:first-child) {
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table tbody tr:first-child td:first-child {
-//   border-left: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table tbody tr:not(:first-child) td:first-child {
-//   border-left: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table tbody tr td:not(:first-child) {
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// -----------------------------------------------------------------------
-
 td[scope="row"]::after,
 th[scope="row"]::after {
   content: "";
   position: absolute;
   top: 0;
-  right: -4px;
+  right: -1px;
   bottom: 0;
-  width: 4px;
+  width: 2px;
   background-color: green;
 }
-// -----------------------------------------------------------------
-
-.table thead tr:first-child th[scope="row"] {
-  border: 4px solid red;
-}
-.table thead tr:first-child th {
-  border-left: 4px solid red;
-  border-top: 4px solid red;
-  border-bottom: 4px solid red;
-  border-right: none;
-}
-.table thead tr:first-child th[scope="row"] ~ th {
-  border-left: none;
-  border-top: 4px solid red;
-  border-bottom: 4px solid red;
-  border-right: 4px solid red;
+td[scope="row"]::before,
+th[scope="row"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  bottom: 0;
+  width: 1px;
+  background-color: #d6d6d6;
 }
 
-.table tr td[scope="row"] {
-  border: 4px solid red;
-  border-top: none;
-}
-.table tr td {
-  border-left: 4px solid red;
-   
-  border-bottom: 4px solid red;
-  // border-right: none;
-}
-.table tr td[scope="row"] ~ td {
-  border-left: none;   
-  border-bottom: 4px solid red;
-  border-right: 4px solid red;
+.dark .wrap-table {
+  filter: invert(100) hue-rotate(180deg);
 }
 </style>
