@@ -16,8 +16,8 @@
     <table class="table" ref="tableRef">
       <thead class="t-head-fixed">
         <tr>
-          <th scope="row">name</th>
-          <th>maidenName</th>
+          <th>name</th>
+          <th scope="row">maidenName</th>
           <th>age</th>
           <th>gender</th>
           <th>email</th>
@@ -44,8 +44,8 @@
       </thead>
       <tbody>
         <tr v-for="(row, index) in table" :key="index">
-          <td scope="row">{{ row.firstName }} {{ row.lastName }}</td>
-          <td>{{ row.maidenName }}</td>
+          <td>{{ row.firstName }} {{ row.lastName }}</td>
+          <td scope="row">{{ row.maidenName }}</td>
           <td>{{ row.age }}</td>
           <td>{{ row.gender }}</td>
           <td>{{ row.email }}</td>
@@ -204,8 +204,8 @@ li {
   }
 }
 
-.table {
-  border-spacing: 0;
+.table {  
+  border-collapse: collapse;
   margin: 0;
   color: #000;
 }
@@ -216,7 +216,6 @@ li {
   text-align: left;
   border: 1px solid #d6d6d6;
   white-space: nowrap;
-  overflow: hidden;
 }
 .table th {
   background-color: #666;
@@ -236,6 +235,9 @@ li {
 }
 .table tr:hover {
   background-color: #b5c5c5 !important;
+  & td[scope="row"] {
+    background-color: #b5c5c5 !important;
+  }
 }
 /* Fixed Headers */
 thead.t-head-fixed {
@@ -244,13 +246,40 @@ thead.t-head-fixed {
   top: 0;
   z-index: map-get($zindex, t_head_fixed);
 }
+thead.t-head-fixed::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #666;
+}
 td[scope="row"],
 th[scope="row"] {
   position: -webkit-sticky;
   position: sticky;
   left: 0;
-  z-index: map-get($zindex, scope_row);
-  border-right: 2px solid rgb(175 205 167);
+  z-index: map-get($zindex, scope_row);   
+}
+td[scope="row"]::after,
+th[scope="row"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 2px;
+  background-color: green;
+}
+td[scope="row"]::before,
+th[scope="row"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  bottom: 0;
+  width: 1px;
+  background-color: #d6d6d6;
 }
 
 .dark .wrap-table {
