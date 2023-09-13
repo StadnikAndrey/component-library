@@ -109,7 +109,7 @@ export default {
       wrapTableClass: "",
 
       wrapScrollLeftPosition: 0,
-      scrollbarScrollLeftPosition: 0,       
+      scrollbarScrollLeftPosition: 0,
       allowScrollScrollbar: true,
       allowScrollWrapTable: true,
       scrollScrollbarTimeoutID: null,
@@ -272,6 +272,7 @@ li {
   }
 
   // scrollbar-width: thin;
+  // scrollbar-color: #ccc rgb(241, 239, 239);
   // &::-webkit-scrollbar {
   //   width: 8px;
   //   height: 8px;
@@ -279,7 +280,6 @@ li {
   // &::-webkit-scrollbar-track {
   //   background: rgb(241, 239, 239);
   // }
-
   // &::-webkit-scrollbar-thumb {
   //   background-color: #ccc;
   //   border-radius: 20px;
@@ -289,19 +289,19 @@ li {
   overflow: auto;
   max-width: fit-content;
 
-  // scrollbar-width: thin;
-  // &::-webkit-scrollbar {
-  //   width: 8px;
-  //   height: 8px;
-  // }
-  // &::-webkit-scrollbar-track {
-  //   background: rgb(241, 239, 239);
-  // }
-
-  // &::-webkit-scrollbar-thumb {
-  //   background-color: #ccc;
-  //   border-radius: 20px;
-  // }
+  //  scrollbar-width: thin;
+  //   scrollbar-color: #ccc rgb(241, 239, 239);
+  //   &::-webkit-scrollbar {
+  //     width: 8px;
+  //     height: 8px;
+  //   }
+  //   &::-webkit-scrollbar-track {
+  //     background: rgb(241, 239, 239);
+  //   }
+  //   &::-webkit-scrollbar-thumb {
+  //     background-color: #ccc;
+  //     border-radius: 20px;
+  //   }
 }
 .table {
   border-spacing: 0;

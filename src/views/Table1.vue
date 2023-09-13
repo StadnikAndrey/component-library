@@ -118,7 +118,7 @@ li {
   margin-bottom: 5px;
 
   scrollbar-width: thin;
-  scrollbar-color: #ccc transparent;
+  scrollbar-color: #ccc rgb(241, 239, 239);
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -126,7 +126,6 @@ li {
   &::-webkit-scrollbar-track {
     background: rgb(241, 239, 239);
   }
-
   &::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 20px;

@@ -171,7 +171,7 @@ li {
   max-height: 65vh;
 
   scrollbar-width: thin;
-  scrollbar-color: #ccc transparent;
+  scrollbar-color: #ccc rgb(241, 239, 239);
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
