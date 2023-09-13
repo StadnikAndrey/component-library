@@ -3,10 +3,18 @@
     <p>Table 2 functionality:</p>
     <ul class="table-txt__ul">
       <li>adaptive for different screen sizes: scrolling in two directions</li>
-      <li>fixed table header and the first cell of the row</li>
+      <li>fixed table header and cell of the row</li>
       <li>table width - by content</li>
+      <li>custom scrollbar style</li>
       <li>CSS Scroll Shadows</li>
       <li>dark and light theme for the table implemented with filter CSS</li>
+      <li>all table cells (including fixed ones) have a border</li>
+      <li>
+        The minimum border thickness is 1px. The border of adjacent cells does
+        not collapse even though border-collapse: initial; With border-collapse:
+        collapse; Fixed cells cannot be given a border that does not disappear
+        when the table is scrolled.
+      </li>
     </ul>
   </div>
 
@@ -17,10 +25,10 @@
       <thead class="t-head-fixed">
         <tr>
           <th>name</th>
-          <th>maidenName</th>
+          <th scope="row">maidenName</th>
           <th>age</th>
           <th>gender</th>
-          <th scope="row">email</th>
+          <th>email</th>
           <th>phone</th>
           <th>username</th>
           <th>birthDate</th>
@@ -45,10 +53,10 @@
       <tbody>
         <tr v-for="(row, index) in table" :key="index">
           <td>{{ row.firstName }} {{ row.lastName }}</td>
-          <td>{{ row.maidenName }}</td>
+          <td scope="row">{{ row.maidenName }}</td>
           <td>{{ row.age }}</td>
           <td>{{ row.gender }}</td>
-          <td scope="row">{{ row.email }}</td>
+          <td>{{ row.email }}</td>
           <td>{{ row.phone }}</td>
           <td>{{ row.username }}</td>
           <td>{{ row.birthDate }}</td>
@@ -161,8 +169,6 @@ li {
   overflow: auto;
   max-width: fit-content;
   max-height: 65vh;
-  border: 1px solid #d6d6d6;
-  margin-bottom: 5px;
 
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
@@ -209,15 +215,15 @@ li {
   border-collapse: initial;
   margin: 0;
   color: #000;
+
+  --border-cells: 1px solid #000;
 }
 .table th,
 .table td {
   padding: 10px;
   vertical-align: middle;
   text-align: left;
-  // border: 4px solid #d6d6d6;
   white-space: nowrap;
-  // overflow: hidden;
 }
 .table th {
   background-color: #666;
@@ -241,7 +247,7 @@ li {
 .table tr:hover td[scope="row"] {
   background-color: #b5c5c5 !important;
 }
-/* Fixed Headers */
+/* Fixed Headers, cells start */
 thead.t-head-fixed {
   position: -webkit-sticky;
   position: sticky;
@@ -254,80 +260,7 @@ th[scope="row"] {
   position: sticky;
   left: 0;
   z-index: map-get($zindex, scope_row);
-  // border-right: 4px solid rgb(175 205 167) !important;
 }
-
-.dark .wrap-table {
-  filter: invert(100) hue-rotate(180deg);
-}
-// ---------------------------------------------------------------
-// .table thead tr:first-child th:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-top: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table thead tr:first-child th {
-//   border-top: 1px solid #d6d6d6;
-// }
-// .table thead tr:not(:first-child) th:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table thead tr th:not(:first-child) {
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table tbody tr:first-child td:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table tbody tr:not(:first-child) td:first-child {
-//   border-left: 1px solid #d6d6d6;
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// .table tbody tr td:not(:first-child) {
-//   border-bottom: 1px solid #d6d6d6;
-//   border-right: 1px solid #d6d6d6;
-// }
-// -----------------------------------------------------------------
-// .table thead tr:first-child th:first-child {
-//   border-left: 4px solid red;
-//   border-top: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table thead tr:first-child th {
-//   border-top: 4px solid red;
-// }
-// .table thead tr:not(:first-child) th:first-child {
-//   border-left: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table thead tr th:not(:first-child) {
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table tbody tr:first-child td:first-child {
-//   border-left: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table tbody tr:not(:first-child) td:first-child {
-//   border-left: 4px solid red;
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// .table tbody tr td:not(:first-child) {
-//   border-bottom: 4px solid red;
-//   border-right: 4px solid red;
-// }
-// -----------------------------------------------------------------------
-
 td[scope="row"]::after,
 th[scope="row"]::after {
   content: "";
@@ -338,37 +271,78 @@ th[scope="row"]::after {
   width: 4px;
   background-color: green;
 }
-// -----------------------------------------------------------------
+/* Fixed Headers, cells end */
 
-.table thead tr:first-child th[scope="row"] {
-  border: 4px solid red;
+// border cells start-----------------------------------------------------------------
+.table tr:first-child th[scope="row"] {
+  border: var(--border-cells);
 }
-.table thead tr:first-child th {
-  border-left: 4px solid red;
-  border-top: 4px solid red;
-  border-bottom: 4px solid red;
+.table tr:first-child th {
+  border-left: var(--border-cells);
+  border-top: var(--border-cells);
+  border-bottom: var(--border-cells);
   border-right: none;
 }
-.table thead tr:first-child th[scope="row"] ~ th {
+.table tr:first-child th[scope="row"] ~ th {
   border-left: none;
-  border-top: 4px solid red;
-  border-bottom: 4px solid red;
-  border-right: 4px solid red;
+  border-top: var(--border-cells);
+  border-bottom: var(--border-cells);
+  border-right: var(--border-cells);
+}
+.table tr:first-child th[scope="row"] ~ th:last-child {
+  border-right: none;
+}
+.table tr:first-child th:last-child {
+  border-right: var(--border-cells) !important;
+}
+// --------
+.table tr th[scope="row"] {
+  border-left: var(--border-cells);
+  border-top: none;
+  border-bottom: var(--border-cells);
+  border-right: var(--border-cells);
+}
+.table tr th {
+  border-left: var(--border-cells);
+  border-top: none;
+  border-bottom: var(--border-cells);
+  border-right: none;
+}
+.table tr th[scope="row"] ~ th {
+  border-left: none;
+  border-top: none;
+  border-bottom: var(--border-cells);
+  border-right: var(--border-cells);
+}
+.table tr th[scope="row"] ~ th:last-child {
+  border-right: none;
+}
+.table tr th:last-child {
+  border-right: var(--border-cells) !important;
 }
 
 .table tr td[scope="row"] {
-  border: 4px solid red;
+  border: var(--border-cells);
   border-top: none;
 }
 .table tr td {
-  border-left: 4px solid red;
-   
-  border-bottom: 4px solid red;
-  // border-right: none;
+  border-left: var(--border-cells);
+  border-bottom: var(--border-cells);
 }
 .table tr td[scope="row"] ~ td {
-  border-left: none;   
-  border-bottom: 4px solid red;
-  border-right: 4px solid red;
+  border-left: none;
+  border-bottom: var(--border-cells);
+  border-right: var(--border-cells);
+}
+.table tr td[scope="row"] ~ td:last-child {
+  border-right: none;
+}
+.table tr td:last-child {
+  border-right: var(--border-cells) !important;
+}
+//border cells end----------------------------------------------------
+
+.dark .wrap-table {
+  filter: invert(100) hue-rotate(180deg);
 }
 </style>
