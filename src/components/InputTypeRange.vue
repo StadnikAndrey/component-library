@@ -1,14 +1,15 @@
 <template>
-  <div class="range">    
-     <div class="range__list">
+  <div class="range">
+    <div class="range__list">
       <span
         v-for="item of datalist.options"
         :key="item.value"
         class="range__opt"
-        :class="item.activClass"         
-        :style="`--w: ${item.value}; --total: ${datalist.total}; --start: ${datalist.start}`"
+        :class="item.activClass"
+        :style="`--w: ${item.value}; --total: ${datalist.total}; --start: ${datalist.start}; --t: ${datalist.top}`"
         @click="setValueInput($event, item.value)"
-      >{{item.value + datalist.unit}}</span>
+        >{{ item.value + datalist.unit }}</span
+      >
     </div>
     <input
       class="range__input"
@@ -20,13 +21,13 @@
       @input="changeValueRange($event)"
     />
   </div>
-  <div class="range__res">{{res}}</div>
+  <div class="range__res">{{ res }}</div>
 </template>
 
 <script>
 import { ref } from "vue";
 export default {
-  props: ["values", "unit"],
+  props: ["values", "unit", "top"],
   setup(props) {
     let datalist = ref({});
     datalist.value = {
@@ -34,6 +35,7 @@ export default {
       total: 0,
       start: 0,
       options: [],
+      top: 0,
     };
     let input = ref({});
     input.value = {
@@ -42,6 +44,7 @@ export default {
       max: 0,
     };
     datalist.value.unit = props.unit;
+    datalist.value.top = props.top != undefined ? props.top : 0;
     datalist.value.options = [];
     let valueOptions = Array.from(new Set(props.values));
     valueOptions.sort((a, b) => {
@@ -65,11 +68,11 @@ export default {
 
     return { datalist, input, res };
   },
-  methods: {    
-     changeValueRange(e) {
+  methods: {
+    changeValueRange(e) {
       let values = Array.from(this.datalist.options).map((o) => o.value);
 
-      let prevValue = Number(this.input.value);       
+      let prevValue = Number(this.input.value);
 
       let min = values.find((el, i, arr) => {
         let maxIndex = arr.findIndex((v) => {
@@ -79,7 +82,7 @@ export default {
         return Number(el) <= Number(prevValue) && i == checkMaxIndex;
       });
       let max = values.find((v, i, arr) => {
-        if (arr.length - 1 === i && Number(v) == Number(prevValue)) {          
+        if (arr.length - 1 === i && Number(v) == Number(prevValue)) {
           return Number(v) == Number(prevValue);
         } else {
           return Number(v) > Number(prevValue);
@@ -95,17 +98,17 @@ export default {
         ) {
           return true;
         }
-      });      
-      this.input.value = values[index];      
+      });
+      this.input.value = values[index];
       prevValue = this.input.value;
-      this.res = prevValue;       
+      this.res = prevValue;
       for (let i = 0; i < this.datalist.options.length; i++) {
         if (this.datalist.options[i].value == this.input.value) {
           this.datalist.options[i].activClass = "range__opt--opted";
         } else {
           this.datalist.options[i].activClass = "";
         }
-      }      
+      }
     },
     setValueInput(e, value) {
       this.input.value = value;
@@ -213,6 +216,9 @@ export default {
     }
     &:last-child {
       transform: translateX(-100%);
+    }
+    &:nth-child(even) {
+      top: var(--t);
     }
     color: #e6e6e6;
     font-size: 17px;
