@@ -3,38 +3,39 @@ Functionality:
 
 + Carousel
 + Сharts, diagrams
++ Code editor (CKEditor)
 + Table (adaptive, gorizontal scroll, scrolling in Two Directions, sticky table header)
++ Сountdown timer (left until (date))
++ Markdown (V. Minin 'CRM on Vue.js)
++ Modal window
++ input[type=range] with a choice of proportional and non-proportional values
++ Uploading img to the server: display preview, title, delete option under input 
++ Сountdown timer circle
++ Accordion
++ JSON formatter 
 + Tooltip
+
 - Tooltip when clicking on the question mark icon (example: Medusa) 
 - Tree (in Table)
 - Filter with animation on JS
 - Timeline
-- Buttons "gamburger" with animation
-+ Сountdown timer (left until (date))
+- Buttons "gamburger" with animation 
 - Pagination
 - Up button
 - Map (Leaflet, OpenLayers)
-- Mega menu (Foxtrot, Rozetka)
-+ Code editor (CKEditor)
-+ Markdown (V. Minin 'CRM on Vue.js)
+- Mega menu 
 - Add video from youtube
 - Running numbers (number counter) 
 - Datepiker
-- Preloader
-+ Modal window
+- Preloader 
 - Slider in modal window (Magnific popup, Lightbox)
 - Menu (Narbut)
 - Masondry
-- Star rating
-+ input[type=range] with a choice of proportional and non-proportional values
-+ Uploading img to the server: display preview, title, delete option under input 
+- Star rating 
 - Audio player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
 - Video player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
 - Notifications (example: Slack)   
 - Select with search
-- Tabs
-+ Сountdown timer circle
-- Drag&Drop  
-+ Accordion
-+ JSON formatter 
+- Tabs 
+- Drag&Drop 
 - Custom scrollbar        
