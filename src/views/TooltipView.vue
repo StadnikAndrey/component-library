@@ -77,8 +77,7 @@ export default {
   },
 };
 </script>
-<style lang="scss"  >
-@import "@/assets/css/vars.scss";
+<style lang="scss"> 
 .tooltip-view {
   height: 150vh;
   &__item {
