@@ -1,43 +1,40 @@
 Functionality:
 + live component search in sidebar 
 
-+1. Carousel
-+2. Сharts, diagrams
-+3. Table (adaptive, gorizontal scroll, scrolling in Two Directions, sticky table header)
-4. Tooltip
-5. Tooltip when clicking on the question mark icon (example: Medusa) 
-6. Tree
-7. Filter with animation on JS
-8. Timeline
-9. Buttons "gamburger" with animation
-+10. Сountdown timer (left until (date))
-11. Pagination
-12. Up button
-13. Map (Leaflet, OpenLayers)
-14. Mega menu (Foxtrot, Rozetka)
-+15. Code editor (CKEditor)
-+16. Markdown (V. Minin 'CRM on Vue.js)
-17. Add video from youtube
-18. Datepiker
-19. Preloader
-+20. Modal window
-21. Slider in modal window (Magnific popup, Lightbox)
-22. Menu (Narbut)
-23. Masondry
-24. Star rating
-+25. input[type=range] with a choice of proportional and non-proportional values
-+26. Uploading img to the server: display preview, title, delete option under input 
-27. Audio player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
-28. Video player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
-29. Notifications (example: Slack)
-30.  
-31. Select with search
-32. Tabs
-+33. Сountdown timer circle
-34. Drag&Drop
-35. Running numbers (number counter)  
-+36. Accordion
-+37. JSON formatter
-38.  
-39. The function of converting a number to a number in words
-40. Custom scrollbar        
++ Carousel
++ Сharts, diagrams
++ Table (adaptive, gorizontal scroll, scrolling in Two Directions, sticky table header)
++ Tooltip
+- Tooltip when clicking on the question mark icon (example: Medusa) 
+- Tree (in Table)
+- Filter with animation on JS
+- Timeline
+- Buttons "gamburger" with animation
++ Сountdown timer (left until (date))
+- Pagination
+- Up button
+- Map (Leaflet, OpenLayers)
+- Mega menu (Foxtrot, Rozetka)
++ Code editor (CKEditor)
++ Markdown (V. Minin 'CRM on Vue.js)
+- Add video from youtube
+- Running numbers (number counter) 
+- Datepiker
+- Preloader
++ Modal window
+- Slider in modal window (Magnific popup, Lightbox)
+- Menu (Narbut)
+- Masondry
+- Star rating
++ input[type=range] with a choice of proportional and non-proportional values
++ Uploading img to the server: display preview, title, delete option under input 
+- Audio player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
+- Video player (Neumorphism style,https://codepen.io/myacode/pen/PoqQQNM)
+- Notifications (example: Slack)   
+- Select with search
+- Tabs
++ Сountdown timer circle
+- Drag&Drop  
++ Accordion
++ JSON formatter 
+- Custom scrollbar        

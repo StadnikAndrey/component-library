@@ -15,27 +15,37 @@
         ! does not work with elements placed in several columns with pom.
         column-count: n;
       </li>
+      <li>works on touch screens</li>
     </ul>
   </div>
 
   <div class="tooltip-view">
     <div
       class="tooltip-view__item"
-      @mouseenter="tooltip($event)"
+      @pointerenter="tooltip($event)"
       data-tooltip="text tooltip"
     >
-     <span>tooltip</span>
+      <span>tooltip</span>
+    </div>
+
+     <div
+      class="tooltip-view__item"
+      @pointerenter="tooltip($event)"
+      data-tooltip="2 text tooltip"
+    >
+      <span>2 tooltip</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Tooltip",   
+  name: "Tooltip",
   methods: {
-    tooltip(e) {
+    tooltip(e) {     
+      let touchDevice = "ontouchstart" in document.documentElement;
       let tooltipElem;
-      let coords;       
+      let coords;
       let top;
 
       let of = true;
@@ -49,7 +59,7 @@ export default {
         e.target.append(tooltipElem);
         coords = e.target.getBoundingClientRect();
 
-        tooltipElem.style.maxWidth = e.target.offsetWidth - 15 + "px";
+        tooltipElem.style.maxWidth = e.target.offsetWidth + "px";
         top = -tooltipElem.offsetHeight - 5;
         // if the hint is placed at the top, it will be displayed at the bottom
         if (coords.top < tooltipElem.offsetHeight) {
@@ -58,30 +68,38 @@ export default {
         tooltipElem.style.left = 5 + "px";
         tooltipElem.style.top = top + "px";
       }
+      if (!touchDevice) {
+        e.target.addEventListener("pointerleave", removeTooltip);
+      }
+      if (tooltipElem && !touchDevice) {
+        tooltipElem.addEventListener("pointerenter", removeTooltip);
+      }
+      if (touchDevice && tooltipElem) {
+        document.documentElement.addEventListener("pointerenter", removeTooltip);         
+      }
 
-      e.target.addEventListener("mouseleave", function (e) {
+      function removeTooltip() {
+        console.log(tooltipElem);
         if (tooltipElem) {
           tooltipElem.remove();
           tooltipElem = null;
           of = true;
+        } else {
+          document.documentElement.removeEventListener("pointerenter", removeTooltip);
+          e.target.removeEventListener("pointerleave", removeTooltip);
         }
-      });
-      if (tooltipElem) {
-        tooltipElem.addEventListener("mouseenter", function (e) {
-          tooltipElem.remove();
-          tooltipElem = null;
-          of = true;
-        });
       }
     },
   },
 };
 </script>
-<style lang="scss"> 
+<style lang="scss">
 .tooltip-view {
   height: 150vh;
   &__item {
-    position: relative;
+    position: relative;     
+    max-width: 200px;
+    margin-bottom: 50px;
   }
 }
 
