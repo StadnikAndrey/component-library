@@ -80,6 +80,11 @@ const routes = [
     name: 'JsonFormatter',
     component: () => import('../views/JsonFormatterView.vue')
   },
+  {
+    path: '/tooltip',
+    name: 'Tooltip',
+    component: () => import('../views/TooltipView.vue')
+  },
   { path: '/:pathMatch(.*)*', name: 'Home', component: Home },
 ]
 

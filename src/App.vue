@@ -1,18 +1,13 @@
-<template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/> -->
+<template>  
   <header class="header">
     <div class="content">
       <div class="header__inner">
-        <!-- <div class="header__left"> -->
+        
         <router-link to="/" class="header__left">
           <img class="logo-vue" width="40" src="./assets/img/logo.png" alt="" />
           <p class="logo-txt">Component library</p>
         </router-link>
-        <!-- </div> -->
+        
         <div class="header__right">
           <button
             class="button-colorscheme"
@@ -128,6 +123,7 @@ export default {
         { name: "Accordeon", path: "/accordeon" },
         { name: "Dialog", path: "/dialog" },
         { name: "JSON Formatter", path: "/json-formatter" },
+        { name: "Tooltip", path: "/tooltip" },
       ],
     };
   },
@@ -411,18 +407,5 @@ export default {
   .main__menu {
     padding: 0 15px 0 15px;
   }
-}
-
-// #nav {
-//   padding: 30px;
-
-//   a {
-//     font-weight: bold;
-//     color: #2c3e50;
-
-//     &.router-link-exact-active {
-//       color: #42b983;
-//     }
-//   }
-// }
+} 
 </style>
