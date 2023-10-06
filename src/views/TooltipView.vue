@@ -67,18 +67,15 @@ export default {
         }
         tooltipElem.style.left = 5 + "px";
         tooltipElem.style.top = top + "px";
-      }
-      if (!touchDevice) {
-        e.target.addEventListener("pointerleave", removeTooltip);
-      }
+      }     
       if (tooltipElem && !touchDevice) {
+        e.target.addEventListener("pointerleave", removeTooltip);
         tooltipElem.addEventListener("pointerenter", removeTooltip);
-      }
-      if (touchDevice && tooltipElem) {
+      }else if (tooltipElem && touchDevice) {
         document.documentElement.addEventListener("pointerenter", removeTooltip);         
       }
 
-      function removeTooltip() {         
+      function removeTooltip() {            
         if (tooltipElem) {
           tooltipElem.remove();
           tooltipElem = null;
