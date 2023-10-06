@@ -78,8 +78,7 @@ export default {
         document.documentElement.addEventListener("pointerenter", removeTooltip);         
       }
 
-      function removeTooltip() {
-        console.log(tooltipElem);
+      function removeTooltip() {         
         if (tooltipElem) {
           tooltipElem.remove();
           tooltipElem = null;
