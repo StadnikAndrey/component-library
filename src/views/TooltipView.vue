@@ -49,7 +49,7 @@ export default {
       let coords;
       let top = "auto";
       let bottom;
-      let left = "auto";
+      let left = "0px";
       let right = "auto";
 
       let of = true;
