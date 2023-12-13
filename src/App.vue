@@ -322,8 +322,9 @@ export default {
     background-color: var(--color-bg);
   }
   &__content {
+    width: 100%;
     flex: 1;
-    overflow: hidden;
+    // overflow: hidden;
     padding: 5px 0 50px 0;
   }
   &__menu-link {

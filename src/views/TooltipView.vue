@@ -8,14 +8,9 @@
         the data is transferred to data attributes for possible use in WordPress
         + Vue projects
       </li>
-      <li>
-        if the hint is placed at the top, it will be displayed at the bottom
-      </li>
-      <li>
-        ! does not work with elements placed in several columns with pom.
-        column-count: n;
-      </li>
+      <li>does not go off screen</li>
       <li>works on touch screens</li>
+      <li>this is a device with a touch screen: {{ touchDevice }}</li>
     </ul>
   </div>
 
@@ -23,17 +18,48 @@
     <div
       class="tooltip-view__item"
       @pointerenter="tooltip($event)"
-      data-toolti_p="text tooltip"
+      @click="tooltipTouch($event)"
+      data-toolti_p="<h1>Title</h1><div><p>txt txt</p><p>txt txt</p></div>"
     >
-      <span>tooltip</span>
+      <span>tooltip 1</span>
     </div>
 
     <div
       class="tooltip-view__item"
       @pointerenter="tooltip($event)"
-      data-toolti_p="<p>2 text tooltip</p><p>txt txt</p> <p>txt txt</p><p>txt txt</p><p>txt txt</p><p>txt txt</p><p>txt txt</p>"
+      @click="tooltipTouch($event)"
+      data-toolti_p="<p>text tooltip</p><p>txt txt</p> <p>txt txt</p><p>txt txt</p><p>txt txt</p><p>txt txt</p><p>txt txt</p>"
     >
-      <span>2 tooltip</span>
+      <span>tooltip 2</span>
+    </div>
+
+    <div class="tooltip-view__item">
+      <span
+        style="background: rgb(212 218 212)"
+        @pointerenter="tooltip($event)"
+        @click="tooltipTouch($event)"
+        data-toolti_p='<h2>Tooltip with links</h2>         
+      <p><a href="https://ru.vuejs.org/index.html">Vue.js</a></p>
+      <p><a href="https://v2.nuxt.com/">Nuxt.js</a></p>
+      <p><a href="https://developer.mozilla.org/en-US/">mdn</a></p>
+      <p><a href="https://www.typescriptlang.org/">TypeScript</a></p>
+      <p><a href="https://nodejs.org/en">Node.js</a></p>
+      <p><a href="https://github.com/">GitHub</a></p>
+      <p><a href="https://git-scm.com/book/en/v2">Git book</a></p>
+      <p><a href="https://webpack.js.org/">Webpack</a></p>      
+      '
+        >tooltip with links</span
+      >
+      <span>txt txt txt txt txt txt txt txt txt</span>
+    </div>
+ 
+    <div class="  tooltip-view__item-right-align">
+      <span
+        @pointerenter="tooltip($event)"
+        @click="tooltipTouch($event)"
+        data-toolti_p="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum blanditiis corporis corrupti autem quasi mollitia voluptatibus doloremque aliquid quod iusto earum impedit, maiores quo unde numquam odio molestias voluptatem saepe doloribus debitis. Non ex nam mollitia? Alias, ab non sunt minima quaerat saepe laborum eius a quia corrupti et? Ad?"
+        >right-aligned tooltip</span
+      >
     </div>
   </div>
 </template>
@@ -41,87 +67,167 @@
 <script>
 export default {
   name: "Tooltip",
+  data() {
+    return {
+      touchDevice: "ontouchstart" in document.documentElement,
+      allowCreationTooltip: true,
+    };
+  },
   methods: {
     tooltip(e) {
       let touchDevice = "ontouchstart" in document.documentElement;
-      let tooltipElem;
-      let tooltipArrowElem;
-      let coords;
-      let top = "auto";
-      let bottom;
-      let left = "0px";
-      let right = "auto";
+      if (!touchDevice) {
+        let tooltipElem = null;
+        let tooltipArrowElem = null;
+        let coords = null;
+        let top = "auto";
+        let bottom = "auto";
+        let left = "0px";
+        let right = "auto";
 
-      let of = true;
-      let data = e.target.dataset.toolti_p;
+        let allowCreationTooltip = true;
+        let data = e.target.dataset.toolti_p;
 
-      if (data != "" && of) {
-        of = false;
-        tooltipElem = document.createElement("div");
-        tooltipElem.className = "tooltip_dt";
-        tooltipElem.insertAdjacentHTML("afterbegin", data);
-        e.target.append(tooltipElem);
-        // create arrow
-        tooltipArrowElem = document.createElement("div");
-        tooltipArrowElem.className = "tooltip_dt-arrow";
-        e.target.append(tooltipArrowElem);
-        tooltipArrowElem.style.top = "-1px";
-        tooltipArrowElem.style.left = "4px";
+        if (data != "" && data != undefined && allowCreationTooltip) {
+          allowCreationTooltip = false;
+          e.target.style.position = "relative";
+          tooltipElem = document.createElement("div");
+          tooltipElem.className = "tooltip_dt";
+          tooltipElem.insertAdjacentHTML("afterbegin", data);
+          e.target.append(tooltipElem);
+          // create arrow
+          tooltipArrowElem = document.createElement("div");
+          tooltipArrowElem.className = "tooltip_dt-arrow";
+          e.target.append(tooltipArrowElem);
+          tooltipArrowElem.style.top = "-1px";
+          tooltipArrowElem.style.left = "4px";
 
-        coords = e.target.getBoundingClientRect();
+          coords = e.target.getBoundingClientRect();
 
-        // tooltipElem.style.maxWidth = e.target.offsetWidth + "px";
-        bottom = e.target.offsetHeight + "px";
+          bottom = e.target.offsetHeight + "px";
 
-        // if the hint is placed at the top, it will be displayed at the bottom
-        if (coords.top < tooltipElem.offsetHeight) {
-          bottom = "auto";
-          top = e.target.offsetHeight + "px";
-          tooltipArrowElem.className = "tooltip_dt-arrow-top";
-          tooltipArrowElem.style.top = "auto";
-          tooltipArrowElem.style.bottom = "-1px";
+          if (coords?.top < tooltipElem.offsetHeight) {
+            bottom = "auto";
+            top = e.target.offsetHeight + "px";
+            tooltipArrowElem.className = "tooltip_dt-arrow-top";
+            tooltipArrowElem.style.top = "auto";
+            tooltipArrowElem.style.bottom = "-1px";
+          }
+
+          tooltipElem.style.top = top;
+          tooltipElem.style.bottom = bottom;
+
+          if (
+            coords?.left + tooltipElem.offsetWidth + 0 >=
+            document.documentElement.clientWidth
+          ) {
+            left =
+              coords?.left +
+              tooltipElem.offsetWidth -
+              document.documentElement.clientWidth +
+              2;
+            left = -left + "px";
+          }
+          tooltipElem.style.left = left;
+          tooltipElem.style.right = right;
         }
 
-        tooltipElem.style.top = top;
-        tooltipElem.style.bottom = bottom;
-
-        if (
-          coords.left + tooltipElem.offsetWidth + 0 >=
-          document.documentElement.clientWidth
-        ) {
-          left =
-            coords.left +
-            tooltipElem.offsetWidth -
-            document.documentElement.clientWidth +
-            2;
-          left = -left + "px";
+        if (tooltipElem != null) {
+          e.target.addEventListener("pointerleave", removeTooltip);
         }
-        tooltipElem.style.left = left;
-        tooltipElem.style.right = right;
+
+        function removeTooltip() {
+          if (tooltipElem) {
+            tooltipElem.remove();
+            tooltipElem = null;
+            tooltipArrowElem.remove();
+            tooltipArrowElem = null;
+            allowCreationTooltip = true;
+            e.target.removeEventListener("pointerleave", removeTooltip);
+          }
+        }
       }
-      if (tooltipElem && !touchDevice) {
-        e.target.addEventListener("pointerleave", removeTooltip);
-        // tooltipElem.addEventListener("pointerenter", removeTooltip);
-      } else if (tooltipElem && touchDevice) {
+    },
+    tooltipTouch(e) {
+      let touchDevice = "ontouchstart" in document.documentElement;
+      if (touchDevice) {
+        let tooltipElem = null;
+        let tooltipArrowElem = null;
+        let coords = null;
+        let top = "auto";
+        let bottom = "auto";
+        let left = "0px";
+        let right = "auto";
+        let data = e.currentTarget.dataset.toolti_p;
+        let thisVueComponent = this;
+
+        if (data != "" && data != undefined && this.allowCreationTooltip) {
+          this.allowCreationTooltip = false;
+          e.currentTarget.style.position = "relative";
+          tooltipElem = document.createElement("div");
+          tooltipElem.className = "tooltip_dt";
+          tooltipElem.insertAdjacentHTML("afterbegin", data);
+          e.currentTarget.append(tooltipElem);
+          // create arrow
+          tooltipArrowElem = document.createElement("div");
+          tooltipArrowElem.className = "tooltip_dt-arrow";
+          e.currentTarget.append(tooltipArrowElem);
+          tooltipArrowElem.style.top = "-1px";
+          tooltipArrowElem.style.left = "4px";
+
+          coords = e.currentTarget.getBoundingClientRect();
+
+          bottom = e.currentTarget.offsetHeight + "px";
+
+          if (coords?.top < tooltipElem.offsetHeight) {
+            bottom = "auto";
+            top = e.currentTarget.offsetHeight + "px";
+            tooltipArrowElem.className = "tooltip_dt-arrow-top";
+            tooltipArrowElem.style.top = "auto";
+            tooltipArrowElem.style.bottom = "-1px";
+          }
+
+          tooltipElem.style.top = top;
+          tooltipElem.style.bottom = bottom;
+
+          if (
+            coords?.left + tooltipElem.offsetWidth + 0 >=
+            document.documentElement.clientWidth
+          ) {
+            left =
+              coords?.left +
+              tooltipElem.offsetWidth -
+              document.documentElement.clientWidth +
+              2;
+            left = -left + "px";
+          }
+          tooltipElem.style.left = left;
+          tooltipElem.style.right = right;
+        }
+
         document.documentElement.addEventListener(
-          "pointerenter",
-          removeTooltip
+          "pointerover",
+          handlerRemoveTooltip
         );
-      }
 
-      function removeTooltip() {
-        if (tooltipElem) {
-          tooltipElem.remove();
-          tooltipElem = null;
-          tooltipArrowElem.remove();
-          tooltipArrowElem = null;
-          of = true;
-        } else {
-          document.documentElement.removeEventListener(
-            "pointerenter",
-            removeTooltip
-          );
-          e.target.removeEventListener("pointerleave", removeTooltip);
+        function handlerRemoveTooltip(event) {
+          if (event.target.closest(".tooltip_dt") == null && tooltipElem) {
+            removeTooltip();
+            thisVueComponent.allowCreationTooltip = true;
+          }
+        }
+
+        function removeTooltip() {
+          if (tooltipElem) {
+            tooltipElem.remove();
+            tooltipElem = null;
+            tooltipArrowElem.remove();
+            tooltipArrowElem = null;
+            document.documentElement.removeEventListener(
+              "pointerover",
+              handlerRemoveTooltip
+            );
+          }
         }
       }
     },
@@ -132,9 +238,19 @@ export default {
 .tooltip-view {
   height: 150vh;
   &__item {
-    position: relative;
-    max-width: 200px;
+    width: fit-content;
     margin-bottom: 50px;
+
+    & a {
+      display: inline-block;
+      padding: 5px 0;
+    }
+    & a:hover {
+      color: burlywood;
+    }
+  }
+  &__item-right-align{
+    text-align: right;
   }
 }
 
@@ -147,8 +263,8 @@ export default {
   background-color: #333333;
   white-space: initial;
   text-align: left;
-  min-width: 320px;
-  max-width: 320px;
+  min-width: 308px;
+  max-width: 308px;
 }
 
 .tooltip_dt:hover {
