@@ -52,9 +52,10 @@
       >
       <span>txt txt txt txt txt txt txt txt txt</span>
     </div>
- 
-    <div class="  tooltip-view__item-right-align">
+
+    <div class="tooltip-view__item-right-align">
       <span
+        class="tooltip-view__item"
         @pointerenter="tooltip($event)"
         @click="tooltipTouch($event)"
         data-toolti_p="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum blanditiis corporis corrupti autem quasi mollitia voluptatibus doloremque aliquid quod iusto earum impedit, maiores quo unde numquam odio molestias voluptatem saepe doloribus debitis. Non ex nam mollitia? Alias, ab non sunt minima quaerat saepe laborum eius a quia corrupti et? Ad?"
@@ -85,12 +86,26 @@ export default {
         let left = "0px";
         let right = "auto";
 
-        let allowCreationTooltip = true;
+        this.allowCreationTooltip = true;
         let data = e.target.dataset.toolti_p;
 
-        if (data != "" && data != undefined && allowCreationTooltip) {
-          allowCreationTooltip = false;
+        if (data != "" && data != undefined && this.allowCreationTooltip) {
+          this.allowCreationTooltip = false;
           e.target.style.position = "relative";
+
+          let targetComputedStyle = getComputedStyle(e.target);
+          let targetTopBorderWidth = Math.round(
+            parseFloat(targetComputedStyle["border-top-width"])
+          );
+          let targetBorderBottomWidth = Math.round(
+            parseFloat(targetComputedStyle["border-bottom-width"])
+          );
+          let targetHorizontalBorderWidth =
+            targetTopBorderWidth + targetBorderBottomWidth; 
+          let targetRightBorderWidth = Math.round(
+            parseFloat(targetComputedStyle["border-right-width"])
+          );           
+
           tooltipElem = document.createElement("div");
           tooltipElem.className = "tooltip_dt";
           tooltipElem.insertAdjacentHTML("afterbegin", data);
@@ -99,33 +114,33 @@ export default {
           tooltipArrowElem = document.createElement("div");
           tooltipArrowElem.className = "tooltip_dt-arrow";
           e.target.append(tooltipArrowElem);
-          tooltipArrowElem.style.top = "-1px";
+          tooltipArrowElem.style.top = "0px";
           tooltipArrowElem.style.left = "4px";
 
           coords = e.target.getBoundingClientRect();
 
-          bottom = e.target.offsetHeight + "px";
+          bottom = e.target.offsetHeight - targetHorizontalBorderWidth + "px";
 
           if (coords?.top < tooltipElem.offsetHeight) {
             bottom = "auto";
-            top = e.target.offsetHeight + "px";
+            top = e.target.offsetHeight - targetHorizontalBorderWidth + "px";
             tooltipArrowElem.className = "tooltip_dt-arrow-top";
             tooltipArrowElem.style.top = "auto";
-            tooltipArrowElem.style.bottom = "-1px";
+            tooltipArrowElem.style.bottom = "0px";
           }
 
           tooltipElem.style.top = top;
           tooltipElem.style.bottom = bottom;
 
           if (
-            coords?.left + tooltipElem.offsetWidth + 0 >=
+            coords?.left + tooltipElem.offsetWidth + targetRightBorderWidth >=
             document.documentElement.clientWidth
           ) {
             left =
               coords?.left +
-              tooltipElem.offsetWidth -
-              document.documentElement.clientWidth +
-              2;
+              tooltipElem.offsetWidth +
+              targetRightBorderWidth -
+              document.documentElement.clientWidth + 2;
             left = -left + "px";
           }
           tooltipElem.style.left = left;
@@ -142,7 +157,6 @@ export default {
             tooltipElem = null;
             tooltipArrowElem.remove();
             tooltipArrowElem = null;
-            allowCreationTooltip = true;
             e.target.removeEventListener("pointerleave", removeTooltip);
           }
         }
@@ -164,6 +178,20 @@ export default {
         if (data != "" && data != undefined && this.allowCreationTooltip) {
           this.allowCreationTooltip = false;
           e.currentTarget.style.position = "relative";
+
+          let targetComputedStyle = getComputedStyle(e.currentTarget);
+          let targetTopBorderWidth = Math.round(
+            parseFloat(targetComputedStyle["border-top-width"])
+          );
+          let targetBorderBottomWidth = Math.round(
+            parseFloat(targetComputedStyle["border-bottom-width"])
+          );
+          let targetHorizontalBorderWidth =
+            targetTopBorderWidth + targetBorderBottomWidth;
+          let targetRightBorderWidth = Math.round(
+            parseFloat(targetComputedStyle["border-right-width"])
+          );
+
           tooltipElem = document.createElement("div");
           tooltipElem.className = "tooltip_dt";
           tooltipElem.insertAdjacentHTML("afterbegin", data);
@@ -172,33 +200,35 @@ export default {
           tooltipArrowElem = document.createElement("div");
           tooltipArrowElem.className = "tooltip_dt-arrow";
           e.currentTarget.append(tooltipArrowElem);
-          tooltipArrowElem.style.top = "-1px";
+          tooltipArrowElem.style.top = "0px";
           tooltipArrowElem.style.left = "4px";
 
           coords = e.currentTarget.getBoundingClientRect();
 
-          bottom = e.currentTarget.offsetHeight + "px";
+          bottom =
+            e.currentTarget.offsetHeight - targetHorizontalBorderWidth + "px";
 
           if (coords?.top < tooltipElem.offsetHeight) {
             bottom = "auto";
-            top = e.currentTarget.offsetHeight + "px";
+            top =
+              e.currentTarget.offsetHeight - targetHorizontalBorderWidth + "px";
             tooltipArrowElem.className = "tooltip_dt-arrow-top";
             tooltipArrowElem.style.top = "auto";
-            tooltipArrowElem.style.bottom = "-1px";
+            tooltipArrowElem.style.bottom = "0px";
           }
 
           tooltipElem.style.top = top;
           tooltipElem.style.bottom = bottom;
 
           if (
-            coords?.left + tooltipElem.offsetWidth + 0 >=
+            coords?.left + tooltipElem.offsetWidth + targetRightBorderWidth >=
             document.documentElement.clientWidth
           ) {
             left =
-              coords?.left +
-              tooltipElem.offsetWidth -
-              document.documentElement.clientWidth +
-              2;
+              (coords?.left +
+              tooltipElem.offsetWidth +
+              targetRightBorderWidth) -
+              document.documentElement.clientWidth + 2;
             left = -left + "px";
           }
           tooltipElem.style.left = left;
@@ -240,6 +270,7 @@ export default {
   &__item {
     width: fit-content;
     margin-bottom: 50px;
+    border: 5px solid grey;
 
     & a {
       display: inline-block;
@@ -249,7 +280,7 @@ export default {
       color: burlywood;
     }
   }
-  &__item-right-align{
+  &__item-right-align {
     text-align: right;
   }
 }
@@ -263,8 +294,8 @@ export default {
   background-color: #333333;
   white-space: initial;
   text-align: left;
-  min-width: 308px;
-  max-width: 308px;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 .tooltip_dt:hover {
