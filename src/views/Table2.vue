@@ -117,21 +117,10 @@ export default {
   methods: {
     init() {
       let wrap = this.$refs.wrapRef;
-      if (wrap) {
-        let borderWidth = parseFloat(
-          window.getComputedStyle(wrap)["border-width"]
-        );
-        let table = this.$refs.tableRef;
-        // if there is a vertical scrollbar (table height is greater than container height (container height is set))
-        let widthVerticalScrollbar =
-          wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2);
-        if (table.offsetHeight > wrap.offsetHeight) {
-          // if the scrollbar is of standard width (~16px) (not mobile, not ubuntu, ...)
-          if (widthVerticalScrollbar > 14) {
-            this.wrapTableClass = "wrap-table--with-scrollbar";
-          } else {
-            this.wrapTableClass = "wrap-table--without-scrollbar";
-          }
+      if (wrap) {         
+        let table = this.$refs.tableRef;        
+        if (table.offsetHeight > wrap.offsetHeight) {         
+          this.wrapTableClass = "wrap-table--with-scrollbar";          
         } else {
           this.wrapTableClass = "wrap-table--without-scrollbar";
         }
@@ -142,69 +131,84 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/css/vars.scss";
+
 .table-txt {
   margin-bottom: 25px;
+
   &__ul {
     margin-bottom: 25px;
     list-style-type: circle;
     padding-left: 18px;
   }
+
   & p {
     margin-bottom: 10px;
   }
 }
+
 .table-title {
   margin-bottom: 5px;
   font-style: italic;
   font-weight: bold;
 }
+
 ul ul {
   padding-left: 20px;
 }
+
 li {
   padding: 2px 0;
 }
+
 ////////////////////////
 .wrap-table {
+  border-bottom: 1px solid;
   overflow: auto;
   max-width: fit-content;
   max-height: 65vh;
 
   scrollbar-width: thin;
   scrollbar-color: #ccc rgb(241, 239, 239);
+
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
+
   &::-webkit-scrollbar-track {
     background: rgb(241, 239, 239);
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 20px;
   }
 
   background: linear-gradient(to right, #fff 30%, rgba(255, 255, 255, 0)),
-    linear-gradient(to right, rgba(255, 255, 255, 0), #fff 70%) 0 100%,
-    radial-gradient(
-      farthest-side at 0% 50%,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0)
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 1) 92%,
-      rgb(225 227 230) 95%,
-      rgba(173, 176, 180, 1) 98%,
-      rgba(144, 144, 148, 1) 99%
-    );
+  linear-gradient(to right, rgba(255, 255, 255, 0), #fff 70%) 0 100%,
+  radial-gradient(farthest-side at 0% 50%,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0)),
+  linear-gradient(90deg,
+    rgba(255, 255, 255, 1) 92%,
+    rgb(225 227 230) 95%,
+    rgba(173, 176, 180, 1) 98%,
+    rgba(144, 144, 148, 1) 99%);
   background-repeat: no-repeat;
   background-color: #fff;
-  background-position: 0 0, 100%, 0 0, 100% 100%;
-  background-attachment: local, local, scroll, scroll;
+  background-position: 0 0,
+  100%,
+  0 0,
+  100% 100%;
+  background-attachment: local,
+  local,
+  scroll,
+  scroll;
+
   &--with-scrollbar {
     background-size: 40px 100%, 40px 100%, 14px 100%, 450px 100%;
   }
+
   &--without-scrollbar {
     background-size: 40px 100%, 40px 100%, 14px 100%, 170px 100%;
   }
@@ -218,6 +222,7 @@ li {
 
   --border-cells: 1px solid #000;
 }
+
 .table th,
 .table td {
   padding: 10px;
@@ -225,28 +230,36 @@ li {
   text-align: left;
   white-space: nowrap;
 }
+
 .table th {
   background-color: #666;
   color: #fff;
 }
+
 .table tr:nth-child(even) td[scope="row"] {
   background-color: #e5e5e5;
 }
+
 .table tr:nth-child(odd) td[scope="row"] {
   background-color: rgba(255, 255, 255, 1);
 }
+
 .table tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
 .table tr:nth-child(odd) {
   background-color: rgba(255, 255, 255, 0);
 }
+
 .table tr:hover {
   background-color: #b5c5c5 !important;
 }
+
 .table tr:hover td[scope="row"] {
   background-color: #b5c5c5 !important;
 }
+
 /* Fixed Headers, cells start */
 thead.t-head-fixed {
   position: -webkit-sticky;
@@ -254,6 +267,7 @@ thead.t-head-fixed {
   top: 0;
   z-index: map-get($zindex, t_head_fixed);
 }
+
 td[scope="row"],
 th[scope="row"] {
   position: -webkit-sticky;
@@ -261,6 +275,7 @@ th[scope="row"] {
   left: 0;
   z-index: map-get($zindex, scope_row);
 }
+
 td[scope="row"]::after,
 th[scope="row"]::after {
   content: "";
@@ -271,30 +286,36 @@ th[scope="row"]::after {
   width: 4px;
   background-color: green;
 }
+
 /* Fixed Headers, cells end */
 
 // border cells start-----------------------------------------------------------------
 .table tr:first-child th[scope="row"] {
   border: var(--border-cells);
 }
+
 .table tr:first-child th {
   border-left: var(--border-cells);
   border-top: var(--border-cells);
   border-bottom: var(--border-cells);
   border-right: none;
 }
-.table tr:first-child th[scope="row"] ~ th {
+
+.table tr:first-child th[scope="row"]~th {
   border-left: none;
   border-top: var(--border-cells);
   border-bottom: var(--border-cells);
   border-right: var(--border-cells);
 }
-.table tr:first-child th[scope="row"] ~ th:last-child {
+
+.table tr:first-child th[scope="row"]~th:last-child {
   border-right: none;
 }
+
 .table tr:first-child th:last-child {
   border-right: var(--border-cells) !important;
 }
+
 // --------
 .table tr th[scope="row"] {
   border-left: var(--border-cells);
@@ -302,21 +323,25 @@ th[scope="row"]::after {
   border-bottom: var(--border-cells);
   border-right: var(--border-cells);
 }
+
 .table tr th {
   border-left: var(--border-cells);
   border-top: none;
   border-bottom: var(--border-cells);
   border-right: none;
 }
-.table tr th[scope="row"] ~ th {
+
+.table tr th[scope="row"]~th {
   border-left: none;
   border-top: none;
   border-bottom: var(--border-cells);
   border-right: var(--border-cells);
 }
-.table tr th[scope="row"] ~ th:last-child {
+
+.table tr th[scope="row"]~th:last-child {
   border-right: none;
 }
+
 .table tr th:last-child {
   border-right: var(--border-cells) !important;
 }
@@ -325,21 +350,26 @@ th[scope="row"]::after {
   border: var(--border-cells);
   border-top: none;
 }
+
 .table tr td {
   border-left: var(--border-cells);
   border-bottom: var(--border-cells);
 }
-.table tr td[scope="row"] ~ td {
+
+.table tr td[scope="row"]~td {
   border-left: none;
   border-bottom: var(--border-cells);
   border-right: var(--border-cells);
 }
-.table tr td[scope="row"] ~ td:last-child {
+
+.table tr td[scope="row"]~td:last-child {
   border-right: none;
 }
+
 .table tr td:last-child {
   border-right: var(--border-cells) !important;
 }
+
 //border cells end----------------------------------------------------
 
 .dark .wrap-table {

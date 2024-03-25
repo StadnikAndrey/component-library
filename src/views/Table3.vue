@@ -146,17 +146,9 @@ export default {
         );
         let table = this.$refs.tableRef;
         this.scrollBarStyle.width = wrap.clientWidth + borderWidth * 2 + "px";
-        this.scrollBarInnerStyle.width = table.offsetWidth + "px";
-        // if there is a vertical scrollbar (table height is greater than container height (container height is set))
-        let widthVerticalScrollbar =
-          wrap.offsetWidth - (wrap.clientWidth + borderWidth * 2);
-        if (table.offsetHeight > wrap.offsetHeight) {
-          // if the scrollbar is of standard width (~16px) (not mobile, not ubuntu, ...)
-          if (widthVerticalScrollbar > 14) {
-            this.wrapTableClass = "wrap-table--with-scrollbar";
-          } else {
-            this.wrapTableClass = "wrap-table--without-scrollbar";
-          }
+        this.scrollBarInnerStyle.width = table.offsetWidth + "px";         
+        if (table.offsetHeight > wrap.offsetHeight) {           
+            this.wrapTableClass = "wrap-table--with-scrollbar";          
         } else {
           this.wrapTableClass = "wrap-table--without-scrollbar";
         }

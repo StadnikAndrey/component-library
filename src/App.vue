@@ -1,51 +1,27 @@
-<template>  
+<template>
   <header class="header">
     <div class="content">
       <div class="header__inner">
-        
+
         <router-link to="/" class="header__left">
           <img class="logo-vue" width="40" src="./assets/img/logo.png" alt="" />
           <p class="logo-txt">Component library</p>
         </router-link>
-        
+
         <div class="header__right">
-          <button
-            class="button-colorscheme"
-            :class="btncolorThemeTransform"
-            @click="switchColorTheme"
-            @mousedown="mouseDownBtnColorTheme"
-            @mouseup="mouseUpBtnColorTheme"
-            @mouseout="mouseUpBtnColorTheme"
-            type="button"
-            title="switching color theme"
-          >
-            <svg
-              :class="classSvgLigh"
-              viewBox="0 0 15 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-            >
+          <button class="button-colorscheme" :class="btncolorThemeTransform" @click="switchColorTheme"
+            @mousedown="mouseDownBtnColorTheme" @mouseup="mouseUpBtnColorTheme" @mouseout="mouseUpBtnColorTheme"
+            type="button" title="switching color theme">
+            <svg :class="classSvgLigh" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
+              height="20">
               <path
                 d="M7.5 1.5v-1m0 13.99v-.998m6-5.997h1m-13 0h-1m2-4.996l-1-1m12 0l-1 1m-10 9.993l-1 1m12 0l-1-1m-2-4.997a2.999 2.999 0 01-3 2.998 2.999 2.999 0 113-2.998z"
-                stroke="currentColor"
-                stroke-linecap="square"
-              ></path>
+                stroke="currentColor" stroke-linecap="square"></path>
             </svg>
-            <svg
-              :class="classSvgDark"
-              viewBox="0 0 15 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-            >
-              <path
-                d="M1.66 11.362A6.5 6.5 0 007.693.502a7 7 0 11-6.031 10.86z"
-                stroke="#e0e0e0"
-                stroke-linejoin="round"
-              ></path>
+            <svg :class="classSvgDark" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
+              height="20">
+              <path d="M1.66 11.362A6.5 6.5 0 007.693.502a7 7 0 11-6.031 10.86z" stroke="#e0e0e0"
+                stroke-linejoin="round"></path>
             </svg>
           </button>
         </div>
@@ -57,28 +33,14 @@
       <div class="main__inner">
         <div class="main__sidebar" :class="togleMenu">
           <nav class="main__sidebar-nav">
-            <button
-              class="mobile-menu-btn"
-              :class="btnMenuTransform"
-              @click="showMenu"
-              type="button"
-            >
+            <button class="mobile-menu-btn" :class="btnMenuTransform" @click="showMenu" type="button">
               <span class="mobile-menu-btn__line"></span>
             </button>
             <div class="main__menu">
-              <input
-                class="main__inp-search"
-                type="search"
-                v-model.trim="valueSearch"
-                placeholder="search components"
-              />
-              <router-link
-                class="main__menu-link"
-                v-for="item of createMenu"
-                :key="item.name"
-                :to="item.path"
-                @click="hideMenu"
-              >
+              <input class="main__inp-search" type="search" v-model.trim="valueSearch"
+                placeholder="search components" />
+              <router-link class="main__menu-link" v-for="item of createMenu" :key="item.name" :to="item.path"
+                @click="hideMenu">
                 {{ item.name }}
               </router-link>
             </div>
@@ -223,8 +185,8 @@ export default {
   color: var(--color-text);
   min-height: 100vh;
   background-color: var(--color-bg);
-  // word-break: break-all;
 }
+
 .footer {
   position: sticky;
   top: 100vh;
@@ -232,12 +194,14 @@ export default {
   text-align: center;
   border-top: 1px solid var(--color-text);
 }
+
 .content {
   width: 100%;
   max-width: 1450px;
   padding: 0 15px;
   margin: 0 auto;
 }
+
 .header {
   position: fixed;
   left: 0;
@@ -246,28 +210,34 @@ export default {
   z-index: map-get($zindex, header);
   background-color: var(--color-bg);
   box-shadow: 0 1px 2px var(--color-text);
+
   &__inner {
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
   &__left {
     display: flex;
     align-items: center;
     color: var(--color-text);
   }
 }
+
 .logo-txt {
   text-transform: uppercase;
 }
+
 .hide-icon-theme--vue {
   display: none;
 }
+
 .btncolorThemeTransform {
   transform: translateY(2px);
   transition: 0.2s;
 }
+
 .mobile-menu-btn {
   background-color: transparent;
   padding: 0;
@@ -275,6 +245,7 @@ export default {
   outline: none;
   display: none;
   margin-top: 4px;
+
   &::before,
   &::after {
     content: "";
@@ -283,9 +254,11 @@ export default {
     height: 2px;
     background-color: var(--color-text);
   }
+
   &::before {
     margin-bottom: 4px;
   }
+
   &__line {
     display: block;
     width: 25px;
@@ -294,39 +267,45 @@ export default {
     margin-bottom: 4px;
   }
 }
+
 .mobile-menu-btn--transform-js {
   & .mobile-menu-btn__line {
     opacity: 0;
   }
+
   &::before {
     transform: translateY(6px) rotate(135deg);
   }
+
   &::after {
     transform: translateY(-6px) rotate(-135deg);
   }
 }
+
 .main {
   &__inner {
     display: flex;
     gap: 15px;
     padding-top: 85px;
   }
+
   &__sidebar {
     width: 100%;
     max-width: 280px;
   }
+
   &__sidebar-nav {
     overflow-y: auto;
     height: 100%;
     padding: 0 0 120px 0;
     background-color: var(--color-bg);
   }
+
   &__content {
-    width: 100%;
-    flex: 1;
-    // overflow: hidden;
+    width: calc(100% - 280px);
     padding: 5px 0 50px 0;
   }
+
   &__menu-link {
     display: block;
     padding: 5px 5px 5px 10px;
@@ -334,6 +313,7 @@ export default {
     border-bottom-right-radius: 20px;
     color: var(--color-text);
     position: relative;
+
     &::after {
       content: "";
       display: block;
@@ -346,17 +326,21 @@ export default {
       top: 10px;
       opacity: 0;
     }
+
     &:hover {
       background-color: var(--color-bg-item-menu-hover);
     }
+
     &.router-link-exact-active {
       color: var(--color-bg-item-menu-activ);
+
       &::after {
         opacity: 1;
         transition: 1s;
       }
     }
   }
+
   &__inp-search {
     padding: 4px 10px;
     margin-bottom: 20px;
@@ -371,13 +355,16 @@ export default {
     top: 18px;
     z-index: map-get($zindex, mobile_menu_btn);
   }
+
   .mobile-menu-btn--transform-js {
     position: relative;
     margin-bottom: 50px;
   }
+
   .header__left {
     margin-left: 50px;
   }
+
   .main__sidebar {
     position: fixed;
     left: -100%;
@@ -385,11 +372,13 @@ export default {
     bottom: 0;
     background-color: var(--color-bg);
     z-index: map-get($zindex, main_sidebar);
+
     &--activ-vue {
       left: 0;
       transition: 0.2s;
     }
   }
+
   .scrim {
     position: fixed;
     left: 0;
@@ -400,13 +389,19 @@ export default {
     opacity: 0;
     z-index: map-get($zindex, scrim);
     transition: opacity 0.25s linear;
+
     &--activ-vue {
       z-index: map-get($zindex, scrim_activ);
       opacity: 0.5;
     }
   }
+
   .main__menu {
     padding: 0 15px 0 15px;
   }
-} 
+
+  .main__content {
+    width: 100%;
+  }
+}
 </style>
