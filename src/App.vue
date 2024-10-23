@@ -78,6 +78,7 @@ export default {
         { name: "Table 1", path: "/table-1" },
         { name: "Table 2", path: "/table-2" },
         { name: "Table 3", path: "/table-3" },
+        { name: "Table 4", path: "/table-4" },
         { name: "Image upload", path: "/image-upload" },
         { name: "input[type=range]", path: "/input-type-range" },
         { name: "Markdown editor", path: "/markdown-editor" },

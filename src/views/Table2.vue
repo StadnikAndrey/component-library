@@ -16,83 +16,505 @@
         when the table is scrolled.
       </li>
     </ul>
-  </div>
+  </div>   
 
-  <h2 class="table-title">Table</h2>
+  <button type="button" @click="showDialog">show table Tenses in English</button>
 
-  <div class="wrap-table" :class="wrapTableClass" ref="wrapRef">
-    <table class="table" ref="tableRef">
-      <thead class="t-head-fixed">
-        <tr>
-          <th>name</th>
-          <th scope="row">maidenName</th>
-          <th>age</th>
-          <th>gender</th>
-          <th>email</th>
-          <th>phone</th>
-          <th>username</th>
-          <th>birthDate</th>
-          <th>image</th>
-          <th>bloodGroup</th>
-          <th>height</th>
-          <th>weight</th>
-          <th>eyeColor</th>
-          <th>hairColor</th>
-          <th>domain</th>
-          <th>ip</th>
-          <th>address</th>
-          <th>city</th>
-          <th>postalCode</th>
-          <th>state</th>
-          <th>macAddress</th>
-          <th>university</th>
-          <th>ein</th>
-          <th>ssn</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(row, index) in table" :key="index">
-          <td>{{ row.firstName }} {{ row.lastName }}</td>
-          <td scope="row">{{ row.maidenName }}</td>
-          <td>{{ row.age }}</td>
-          <td>{{ row.gender }}</td>
-          <td>{{ row.email }}</td>
-          <td>{{ row.phone }}</td>
-          <td>{{ row.username }}</td>
-          <td>{{ row.birthDate }}</td>
-          <td>{{ row.image }}</td>
-          <td>{{ row.bloodGroup }}</td>
-          <td>{{ row.height }}</td>
-          <td>{{ row.weight }}</td>
-          <td>{{ row.eyeColor }}</td>
-          <td>{{ row.hair.color }}</td>
-          <td>{{ row.domain }}</td>
-          <td>{{ row.ip }}</td>
-          <td>{{ row.address.address }}</td>
-          <td>{{ row.address.city }}</td>
-          <td>{{ row.address.postalCode }}</td>
-          <td>{{ row.address.state }}</td>
-          <td>{{ row.macAddress }}</td>
-          <td>{{ row.university }}</td>
-          <td>{{ row.ein }}</td>
-          <td>{{ row.ssn }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <Dialog :active="activeDialog" @active="closeDialog">
+    <h2 class="table-title">Tenses in English</h2>
+    <div class="wrap-table" :class="wrapTableClass" ref="wrapRef">
+      <table class="table" ref="tableRef">
+        <thead class="t-head-fixed">
+          <tr>
+            <th scope="row"></th>
+            <th>Simple</th>
+            <th>Continuous</th>
+            <th>Perfect</th>
+            <th>Perfect Continuous </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">Present</td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="3">TO BE</th>
+                    <!-- <th></th> -->
+                    <!-- <th></th> -->
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it</th>
+                    <th>I</th>
+                    <th>You, we, they</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Is (’s)</td>
+                    <td>Am (’m)</td>
+                    <td>Are (’re)</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Is not (isn’t)</td>
+                    <td>Am not (’m not)</td>
+                    <td>Are not (aren’t)</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Is she?</td>
+                    <td>Am I?</td>
+                    <td>Are you?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where is she?</td>
+                    <td>Where am I?</td>
+                    <td>Where are you?</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="2">OTHER VERBS</th>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it</th>
+                    <th>I, you, we, they</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Vs</td>
+                    <td>V</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Does not (doesn’t) + V</td>
+                    <td>Do not (don’t) + V</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Does + she + V?</td>
+                    <td>Do + they + V?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where does + she + V?</td>
+                    <td>Where do + they + V?</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it</th>
+                    <th>I</th>
+                    <th>You, we, they</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Is (’s) + Ving</td>
+                    <td>Am (I’m) + Ving</td>
+                    <td>Are (’re) + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Is not (isn’t) + Ving</td>
+                    <td>Am not (I’m not) + Ving</td>
+                    <td>Are not (aren’t) + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Is + she + Ving?</td>
+                    <td>Am + I + Ving?</td>
+                    <td>Are + you + Ving?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where is + she + Ving?</td>
+                    <td>Where am + I + Ving?</td>
+                    <td>Where are + you + Ving?</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it</th>
+                    <th>I, you, we, they</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Has (’s) + V3 / Ved</td>
+                    <td>Have (’ve) + V3 / Ved</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Has not (hasn’t) + V3 / Ved</td>
+                    <td>Have not (haven’t) + V3 / Ved</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Has + she + V3 / Ved?</td>
+                    <td>Have + they + V3 / Ved?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where has + she + V3 / Ved?</td>
+                    <td>Where have + they + V3 / Ved?</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it</th>
+                    <th>I, you, we, they</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Has (’s) + been + Ving</td>
+                    <td>Have (’ve) + been + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Has not (hasn’t) + been + Ving</td>
+                    <td>Have not (haven’t) + been + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Has + she + been + Ving?</td>
+                    <td>Have + they + been + Ving?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where has + she + been + Ving?</td>
+                    <td>Where have + they + been + Ving? </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+  
+          <tr>
+            <td scope="row">Past</td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="2">TO BE</th>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it</th>
+                    <th>I, you, we, they</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Was</td>
+                    <td>Were</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Was not (wasn’t)</td>
+                    <td>Were not (weren’t)</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Was she?</td>
+                    <td>Were you?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where was she?</td>
+                    <td>Where were you?</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>OTHER VERBS</th>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it, I, you, we, they</th>                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Ved / V2</td>                   
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Did not (didn’t) + V</td>        
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Did + she + V?</td>        
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where did + she + V?</td>        
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>                 
+                  <tr>
+                    <th></th>
+                    <th>He, she, it</th>   
+                    <th>I, you, we, they</th>                
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Was + Ving</td>
+                    <td>Were + Ving</td>                  
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Was not (wasn’t) + Ving</td>
+                    <td>Were not (weren’t) + Ving</td>         
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Was + she + Ving?</td>
+                    <td>Were + you + Ving?</td>         
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where was + she + Ving?</td>
+                    <td>Where were + you + Ving?</td>           
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>                 
+                  <tr>
+                    <th></th>
+                    <th>He, she, it, I, you, we, they</th>                                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Had + V3 / Ved</td>                 
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Had not (hadn’t) + V3 / Ved</td>              
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Had + she + V3 / Ved?</td>            
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where had + she + V3 / Ved?</td>                
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>                 
+                  <tr>
+                    <th></th>
+                    <th>He, she, it, I, you, we, they</th>                                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Had (’d) + been + Ving</td>                
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Had not (hadn’t) + been + Ving</td>               
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Had + they + been + Ving?</td>             
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where had + they + been + Ving ?</td>                 
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+  
+          <tr>
+            <td scope="row">Future</td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it, I, you, we, they</th>                   
+                  </tr>                 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Will + V</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Will not (won’t) + V</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Will + she + V?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where will + she + V?</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it, I, you, we, they</th>                   
+                  </tr>                 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Will + be + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Will not (won’t) + be + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Will + she + be + Ving?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where will + she + be + Ving?</td>
+                  </tr>
+                </tbody>
+              </table>  
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it, I, you, we, they</th>                   
+                  </tr>                 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Will + have + V3 / Ved</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Will not (won’t) + have + V3 / Ved</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Will + she + have + V3 / Ved?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>When will + she + have + V3 / Ved?</td>
+                  </tr>
+                </tbody>
+              </table>  
+            </td>
+            <td>
+              <table class="table table__in-td">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>He, she, it, I, you, we, they</th>                   
+                  </tr>                 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Affirmative</td>
+                    <td>Will (’ll) + have been + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Negative</td>
+                    <td>Will not (won’t) + have been + Ving</td>
+                  </tr>
+                  <tr>
+                    <td>Question</td>
+                    <td>Will + they + have been + Ving?</td>
+                  </tr>
+                  <tr>
+                    <td>Wh-question</td>
+                    <td>Where will + they + have been + Ving ?</td>
+                  </tr>
+                </tbody>
+              </table>  
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </Dialog>
 </template>
 
-<script>
-import json from "@/assets/json/table_1.json";
-
+<script> 
+import Dialog from "../components/Dialog.vue";
 export default {
   name: "Table2",
+  components: {
+    Dialog,
+  },
   data() {
-    return {
-      table: json,
+    return {       
       allowInitResize: true,
       wrapTableClass: "",
       resizeTimeoutID: null,
+      activeDialog: false,
     };
   },
   mounted() {
@@ -117,14 +539,20 @@ export default {
   methods: {
     init() {
       let wrap = this.$refs.wrapRef;
-      if (wrap) {         
-        let table = this.$refs.tableRef;        
-        if (table.offsetHeight > wrap.offsetHeight) {         
-          this.wrapTableClass = "wrap-table--with-scrollbar";          
+      if (wrap) {
+        let table = this.$refs.tableRef;
+        if (table.offsetHeight > wrap.offsetHeight) {
+          this.wrapTableClass = "wrap-table--with-scrollbar";
         } else {
           this.wrapTableClass = "wrap-table--without-scrollbar";
         }
       }
+    },
+    showDialog() {
+      this.activeDialog = true;
+    },
+    closeDialog() {
+      this.activeDialog = false;
     },
   },
 };
@@ -165,7 +593,6 @@ li {
   border-bottom: 1px solid;
   overflow: auto;
   max-width: fit-content;
-  max-height: 65vh;
 
   scrollbar-width: thin;
   scrollbar-color: #ccc rgb(241, 239, 239);
@@ -225,15 +652,15 @@ li {
 
 .table th,
 .table td {
-  padding: 10px;
-  vertical-align: middle;
-  text-align: left;
+  padding: 5px;
+  vertical-align: top;
   white-space: nowrap;
 }
 
 .table th {
   background-color: #666;
   color: #fff;
+  text-align: center;
 }
 
 .table tr:nth-child(even) td[scope="row"] {
@@ -250,15 +677,7 @@ li {
 
 .table tr:nth-child(odd) {
   background-color: rgba(255, 255, 255, 0);
-}
-
-.table tr:hover {
-  background-color: #b5c5c5 !important;
-}
-
-.table tr:hover td[scope="row"] {
-  background-color: #b5c5c5 !important;
-}
+} 
 
 /* Fixed Headers, cells start */
 thead.t-head-fixed {
@@ -374,5 +793,10 @@ th[scope="row"]::after {
 
 .dark .wrap-table {
   filter: invert(100) hue-rotate(180deg);
+}
+
+.table__in-td {
+  width: 100%;
+  margin-bottom: 5px;   
 }
 </style>

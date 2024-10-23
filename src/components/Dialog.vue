@@ -58,8 +58,8 @@ export default {
   &__content {
     background-color: #fff;
     padding: 10px;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 98%;
+    max-height: 98%;
     overflow-y: auto;
     opacity: 0;    
     transition: opacity .15s cubic-bezier(0.25, 0.8, 0.25, 1);
