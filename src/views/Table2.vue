@@ -16,11 +16,11 @@
         when the table is scrolled.
       </li>
     </ul>
-  </div>   
+  </div>
 
   <button type="button" @click="showDialog">show table Tenses in English</button>
 
-  <Dialog :active="activeDialog" @active="closeDialog">
+  <Dialog :active="'activeDialog'" @active="closeDialog">
     <h2 class="table-title">Tenses in English</h2>
     <div class="wrap-table" :class="wrapTableClass" ref="wrapRef">
       <table class="table" ref="tableRef">
@@ -79,6 +79,126 @@
                   </tr>
                 </tbody>
               </table>
+              <!-- <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental"> </span>  
+                    </p>
+                    <p class="exx__txt-translation"></p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental"> </span>  
+                    </p>
+                    <p class="exx__txt-translation"></p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">  
+                      <span class="exx__color-incidental"> </span>  
+                    </p>
+                    <p class="exx__txt-translation"></p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">  
+                      <span class="exx__color-incidental"> </span>  
+                    </p>
+                    <p class="exx__txt-translation"></p>
+                  </div>
+                </div>                
+              </div> -->
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      is a musician.
+                    </p>
+                    <p class="exx__txt-translation">Він музикант.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      is not a musician.
+                    </p>
+                    <p class="exx__txt-translation">Він не музикант.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Is
+                      <span class="exx__color-incidental">he</span>
+                      a musician?
+                    </p>
+                    <p class="exx__txt-translation">Він музикант?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why is
+                      <span class="exx__color-incidental">he</span>
+                      a musician?
+                    </p>
+                    <p class="exx__txt-translation">Чому він музикант?</p>
+                  </div>
+                </div>
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original"><span class="exx__color-incidental">I </span> am a musician.</p>
+                    <p class="exx__txt-translation">Я (є) музикант.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original"><span class="exx__color-incidental">I</span> am not a musician.</p>
+                    <p class="exx__txt-translation">Я не музикант.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Am <span class="exx__color-incidental">I</span> a musician?
+                    </p>
+                    <p class="exx__txt-translation">Я музикант?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why am
+                      <span class="exx__color-incidental">I</span>
+                      a musician?
+                    </p>
+                    <p class="exx__txt-translation">Чому я музикант?</p>
+                  </div>
+                </div>
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We</span>
+                      are musicians.
+                    </p>
+                    <p class="exx__txt-translation">Ми музиканти.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We</span>
+                      are not musicians.
+                    </p>
+                    <p class="exx__txt-translation">Ми не музиканти.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Are
+                      <span class="exx__color-incidental">we </span>
+                      musicians?
+                    </p>
+                    <p class="exx__txt-translation">Ми музиканти?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why are
+                      <span class="exx__color-incidental">we </span>
+                      musicians?
+                    </p>
+                    <p class="exx__txt-translation">Чому ми музиканти?</p>
+                  </div>
+                </div>
+              </div>
+              <br>
+
               <table class="table table__in-td">
                 <thead>
                   <tr>
@@ -114,6 +234,51 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original"><span class="exx__color-incidental">He</span> eats sweets every day.
+                    </p>
+                    <p class="exx__txt-translation">Він їсть солодощі щодня.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original"><span class="exx__color-incidental">He</span> doesn't eat sweets every
+                      day.</p>
+                    <p class="exx__txt-translation">Він не Їсть солодощі кожного дня.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">Does <span class="exx__color-incidental">he</span> eat sweets every
+                      day?</p>
+                    <p class="exx__txt-translation">Він Їсть солодощі кожного дня?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">Why does <span class="exx__color-incidental">he</span> eat sweets every
+                      day?</p>
+                    <p class="exx__txt-translation">Чому він їсть солодощі кожного дня?</p>
+                  </div>
+                </div>
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original"><span class="exx__color-incidental">I</span> eat sweets every day.</p>
+                    <p class="exx__txt-translation">Я їм солодощі кожного дня.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original"><span class="exx__color-incidental">I</span> don't eat sweets every day
+                    </p>
+                    <p class="exx__txt-translation">Я не їм солодощі кожного дня</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">Do <span class="exx__color-incidental">I</span> eat sweets every day?
+                    </p>
+                    <p class="exx__txt-translation">Я їм солодощі кожного дня?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">Why do <span class="exx__color-incidental">I</span> eat sweets every
+                      day?</p>
+                    <p class="exx__txt-translation">Чому я їм солодощі кожного дня?</p>
+                  </div>
+                </div>
+              </div>              
             </td>
             <td>
               <table class="table table__in-td">
@@ -152,6 +317,105 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      is eating sweets now.
+                    </p>
+                    <p class="exx__txt-translation">Він їсть солодощі зараз.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      is not eating sweets now.
+                    </p>
+                    <p class="exx__txt-translation">Він не їсть солодощі зараз.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Is
+                      <span class="exx__color-incidental">he </span>
+                      eating sweets now?
+                    </p>
+                    <p class="exx__txt-translation">Він їсть солодощі зараз?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why is
+                      <span class="exx__color-incidental">he </span>
+                      eating sweets now?
+                    </p>
+                    <p class="exx__txt-translation">Чому він їсть солодощі зараз?</p>
+                  </div>
+                </div>
+
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      am eating sweets now.
+                    </p>
+                    <p class="exx__txt-translation">Я їм солодощі зараз.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      am not eating sweets right now.
+                    </p>
+                    <p class="exx__txt-translation">Я не їм солодощі зараз.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Am
+                      <span class="exx__color-incidental">I </span>
+                      eating sweets now?
+                    </p>
+                    <p class="exx__txt-translation">Я їм солодощі зараз?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why am
+                      <span class="exx__color-incidental">I </span>
+                      eating sweets now?
+                    </p>
+                    <p class="exx__txt-translation">Чому я їм солодощі зараз?</p>
+                  </div>
+                </div>
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We </span>
+                      are eating sweets now.
+                    </p>
+                    <p class="exx__txt-translation">Ми їмо солодощі зараз.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We </span>
+                      are not eating sweets now.
+                    </p>
+                    <p class="exx__txt-translation">Ми не їмо солодощі зараз.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Are
+                      <span class="exx__color-incidental">we </span>
+                      eating sweets now?
+                    </p>
+                    <p class="exx__txt-translation">Ми їмо солодощі зараз?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why are
+                      <span class="exx__color-incidental">we </span>
+                      eating sweets now?
+                    </p>
+                    <p class="exx__txt-translation">Чому ми їмо солодощі зараз?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -220,7 +484,7 @@
               </table>
             </td>
           </tr>
-  
+
           <tr>
             <td scope="row">Past</td>
             <td>
@@ -259,6 +523,76 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      was a musician.
+                    </p>
+                    <p class="exx__txt-translation">Він був музикантом.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      was not a musician.
+                    </p>
+                    <p class="exx__txt-translation">Він не був музикантом.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Was
+                      <span class="exx__color-incidental">he </span>
+                      a musician?
+                    </p>
+                    <p class="exx__txt-translation">Він був музикантом?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why was
+                      <span class="exx__color-incidental">he </span>
+                      a musician?
+                    </p>
+                    <p class="exx__txt-translation">Чому він був музикантом?</p>
+                  </div>
+                </div>
+
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We </span>
+                      were musicians.
+                    </p>
+                    <p class="exx__txt-translation">Ми були музикантами.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We </span>
+                      weren't musicians.
+                    </p>
+                    <p class="exx__txt-translation">Ми не були музикантами.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Were
+                      <span class="exx__color-incidental">we </span>
+                      musicians?
+                    </p>
+                    <p class="exx__txt-translation">Ми були музикантами?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why were
+                      <span class="exx__color-incidental">we </span>
+                      musicians?
+                    </p>
+                    <p class="exx__txt-translation">Чому ми були музикантами?</p>
+                  </div>
+                </div>
+
+              </div>
+              <br>
+
               <table class="table table__in-td">
                 <thead>
                   <tr>
@@ -267,120 +601,120 @@
                   </tr>
                   <tr>
                     <th></th>
-                    <th>He, she, it, I, you, we, they</th>                   
+                    <th>He, she, it, I, you, we, they</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Affirmative</td>
-                    <td>Ved / V2</td>                   
+                    <td>Ved / V2</td>
                   </tr>
                   <tr>
                     <td>Negative</td>
-                    <td>Did not (didn’t) + V</td>        
+                    <td>Did not (didn’t) + V</td>
                   </tr>
                   <tr>
                     <td>Question</td>
-                    <td>Did + she + V?</td>        
+                    <td>Did + she + V?</td>
                   </tr>
                   <tr>
                     <td>Wh-question</td>
-                    <td>Where did + she + V?</td>        
+                    <td>Where did + she + V?</td>
                   </tr>
                 </tbody>
               </table>
             </td>
             <td>
               <table class="table table__in-td">
-                <thead>                 
+                <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it</th>   
-                    <th>I, you, we, they</th>                
+                    <th>He, she, it</th>
+                    <th>I, you, we, they</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Affirmative</td>
                     <td>Was + Ving</td>
-                    <td>Were + Ving</td>                  
+                    <td>Were + Ving</td>
                   </tr>
                   <tr>
                     <td>Negative</td>
                     <td>Was not (wasn’t) + Ving</td>
-                    <td>Were not (weren’t) + Ving</td>         
+                    <td>Were not (weren’t) + Ving</td>
                   </tr>
                   <tr>
                     <td>Question</td>
                     <td>Was + she + Ving?</td>
-                    <td>Were + you + Ving?</td>         
+                    <td>Were + you + Ving?</td>
                   </tr>
                   <tr>
                     <td>Wh-question</td>
                     <td>Where was + she + Ving?</td>
-                    <td>Where were + you + Ving?</td>           
+                    <td>Where were + you + Ving?</td>
                   </tr>
                 </tbody>
               </table>
             </td>
             <td>
               <table class="table table__in-td">
-                <thead>                 
+                <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it, I, you, we, they</th>                                  
+                    <th>He, she, it, I, you, we, they</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Affirmative</td>
-                    <td>Had + V3 / Ved</td>                 
+                    <td>Had + V3 / Ved</td>
                   </tr>
                   <tr>
                     <td>Negative</td>
-                    <td>Had not (hadn’t) + V3 / Ved</td>              
+                    <td>Had not (hadn’t) + V3 / Ved</td>
                   </tr>
                   <tr>
                     <td>Question</td>
-                    <td>Had + she + V3 / Ved?</td>            
+                    <td>Had + she + V3 / Ved?</td>
                   </tr>
                   <tr>
                     <td>Wh-question</td>
-                    <td>Where had + she + V3 / Ved?</td>                
+                    <td>Where had + she + V3 / Ved?</td>
                   </tr>
                 </tbody>
               </table>
             </td>
             <td>
               <table class="table table__in-td">
-                <thead>                 
+                <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it, I, you, we, they</th>                                  
+                    <th>He, she, it, I, you, we, they</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Affirmative</td>
-                    <td>Had (’d) + been + Ving</td>                
+                    <td>Had (’d) + been + Ving</td>
                   </tr>
                   <tr>
                     <td>Negative</td>
-                    <td>Had not (hadn’t) + been + Ving</td>               
+                    <td>Had not (hadn’t) + been + Ving</td>
                   </tr>
                   <tr>
                     <td>Question</td>
-                    <td>Had + they + been + Ving?</td>             
+                    <td>Had + they + been + Ving?</td>
                   </tr>
                   <tr>
                     <td>Wh-question</td>
-                    <td>Where had + they + been + Ving ?</td>                 
+                    <td>Where had + they + been + Ving ?</td>
                   </tr>
                 </tbody>
               </table>
             </td>
           </tr>
-  
+
           <tr>
             <td scope="row">Future</td>
             <td>
@@ -388,8 +722,8 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it, I, you, we, they</th>                   
-                  </tr>                 
+                    <th>He, she, it, I, you, we, they</th>
+                  </tr>
                 </thead>
                 <tbody>
                   <tr>
@@ -416,8 +750,8 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it, I, you, we, they</th>                   
-                  </tr>                 
+                    <th>He, she, it, I, you, we, they</th>
+                  </tr>
                 </thead>
                 <tbody>
                   <tr>
@@ -437,15 +771,15 @@
                     <td>Where will + she + be + Ving?</td>
                   </tr>
                 </tbody>
-              </table>  
+              </table>
             </td>
             <td>
               <table class="table table__in-td">
                 <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it, I, you, we, they</th>                   
-                  </tr>                 
+                    <th>He, she, it, I, you, we, they</th>
+                  </tr>
                 </thead>
                 <tbody>
                   <tr>
@@ -465,15 +799,15 @@
                     <td>When will + she + have + V3 / Ved?</td>
                   </tr>
                 </tbody>
-              </table>  
+              </table>
             </td>
             <td>
               <table class="table table__in-td">
                 <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it, I, you, we, they</th>                   
-                  </tr>                 
+                    <th>He, she, it, I, you, we, they</th>
+                  </tr>
                 </thead>
                 <tbody>
                   <tr>
@@ -493,7 +827,7 @@
                     <td>Where will + they + have been + Ving ?</td>
                   </tr>
                 </tbody>
-              </table>  
+              </table>
             </td>
           </tr>
         </tbody>
@@ -502,7 +836,7 @@
   </Dialog>
 </template>
 
-<script> 
+<script>
 import Dialog from "../components/Dialog.vue";
 export default {
   name: "Table2",
@@ -510,7 +844,7 @@ export default {
     Dialog,
   },
   data() {
-    return {       
+    return {
       allowInitResize: true,
       wrapTableClass: "",
       resizeTimeoutID: null,
@@ -677,7 +1011,7 @@ li {
 
 .table tr:nth-child(odd) {
   background-color: rgba(255, 255, 255, 0);
-} 
+}
 
 /* Fixed Headers, cells start */
 thead.t-head-fixed {
@@ -797,6 +1131,39 @@ th[scope="row"]::after {
 
 .table__in-td {
   width: 100%;
-  margin-bottom: 5px;   
+  margin-bottom: 5px;
+}
+
+.exx {
+
+  // padding: 10px 5px;
+  &__item {
+    padding: 0 5px 5px 5px;
+    font-size: 14px;
+  }
+
+  &__item:nth-child(odd) {
+    background-color: #f6f7fb;
+  }
+
+  &__item:nth-child(even) {
+    background-color: #e4e8f1;
+  }
+
+  &__item-part {
+    padding-bottom: 6px;
+  }
+
+  &__txt-original {
+    font-weight: bold;
+  }
+
+  &__txt-translation {
+    color: #A1A6BB;
+  }
+
+  &__color-incidental {
+    color: #EB4E36;
+  }
 }
 </style>
