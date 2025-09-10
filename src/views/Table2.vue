@@ -20,7 +20,7 @@
 
   <button type="button" @click="showDialog">show table Tenses in English</button>
 
-  <Dialog :active="'activeDialog'" @active="closeDialog">
+  <Dialog :active="activeDialog" @active="closeDialog">
     <h2 class="table-title">Tenses in English</h2>
     <div class="wrap-table" :class="wrapTableClass" ref="wrapRef">
       <table class="table" ref="tableRef">
@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-if="false">
             <td scope="row">Present</td>
             <td>
               <table class="table table__in-td">
@@ -278,7 +278,7 @@
                     <p class="exx__txt-translation">Чому я їм солодощі кожного дня?</p>
                   </div>
                 </div>
-              </div>              
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -449,6 +449,73 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      has ate sweets so he is very satisfied.
+                    </p>
+                    <p class="exx__txt-translation">Він їв солодощі, тому дуже задоволений.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      has not ate sweets, so he is very satisfied.
+                    </p>
+                    <p class="exx__txt-translation">Він не їв солодощі, тому дуже задоволений.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Has
+                      <span class="exx__color-incidental">he </span>
+                      ate sweets, so he is very satisfied?
+                    </p>
+                    <p class="exx__txt-translation">Він їв солодощі, тому дуже задоволений?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why has
+                      <span class="exx__color-incidental">he </span>
+                      ate sweets?
+                    </p>
+                    <p class="exx__txt-translation">Чому він їв солодощі?</p>
+                  </div>
+                </div>
+
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      have eaten sweets so I’m satisfied.
+                    </p>
+                    <p class="exx__txt-translation">Я з’їв солодощі, тож я задоволений.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      haven't eaten any sweets and I feel very good.
+                    </p>
+                    <p class="exx__txt-translation">Я не з'їв солодощі і почуваю себе дуже добре.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Have
+                      <span class="exx__color-incidental">I </span>
+                      eaten any sweets?
+                    </p>
+                    <p class="exx__txt-translation">Чи я з'їв якісь солодощі?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      What have
+                      <span class="exx__color-incidental">I </span>
+                      eaten sweets?
+                    </p>
+                    <p class="exx__txt-translation">Які солодощі я з'їв?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -482,6 +549,72 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      has been eating sweets for 10 years.
+                    </p>
+                    <p class="exx__txt-translation">Він їсть солодощі вже протягом 10 років.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">He </span>
+                      has not been eating sweets for 10 years.
+                    </p>
+                    <p class="exx__txt-translation">Він не їсть солодкого вже 10 років.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Has
+                      <span class="exx__color-incidental">he </span>
+                      been eating sweets for 10 years?
+                    </p>
+                    <p class="exx__txt-translation">Він їсть солодощі вже 10 років?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why has
+                      <span class="exx__color-incidental">he </span>
+                      been eating sweets for 10 years?
+                    </p>
+                    <p class="exx__txt-translation">Чому він їсть солодощі вже 10 років?</p>
+                  </div>
+                </div>
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      have been eating sweets for 10 years.
+                    </p>
+                    <p class="exx__txt-translation">Я їм солодощі вже протягом 10 років.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      have not been eating sweets for 10 years.
+                    </p>
+                    <p class="exx__txt-translation">Я не їм солодкого вже 10 років.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Have
+                      <span class="exx__color-incidental">I </span>
+                      been eating sweets for 10 years?
+                    </p>
+                    <p class="exx__txt-translation">Я їм солодощі вже 10 років?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Why have
+                      <span class="exx__color-incidental">I </span>
+                      been eating sweets for 10 years?
+                    </p>
+                    <p class="exx__txt-translation">Чому я їм солодощі вже 10 років?</p>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
 
@@ -623,14 +756,48 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      ate sweets yesterday.
+                    </p>
+                    <p class="exx__txt-translation">Я їв солодощі вчора.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      did not eat sweets yesterday.
+                    </p>
+                    <p class="exx__txt-translation">Я вчора не їв солодощів.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Did
+                      <span class="exx__color-incidental">I </span>
+                      eat sweets yesterday?
+                    </p>
+                    <p class="exx__txt-translation">Я вчора їв солодощі?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Where did
+                      <span class="exx__color-incidental">I </span>
+                      eat sweets yesterday?
+                    </p>
+                    <p class="exx__txt-translation">Де я вчора їв солодощі?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
                 <thead>
                   <tr>
                     <th></th>
-                    <th>He, she, it</th>
-                    <th>I, you, we, they</th>
+                    <th>I, he, she, it</th>
+                    <th>You, we, they</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -656,6 +823,73 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      was eating sweets yesterday from 6 to 8 pm.
+                    </p>
+                    <p class="exx__txt-translation">Я їв солодощі вчора з 6 до 8 вечора.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      was not eating sweets yesterday from 6 to 8 pm.
+                    </p>
+                    <p class="exx__txt-translation">Я не їв солодкого вчора з 18:00 до 20:00.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Was
+                      <span class="exx__color-incidental">I </span>
+                      eating sweets yesterday from 6 to 8 pm?
+                    </p>
+                    <p class="exx__txt-translation">Я їв солодощі вчора з 18:00 до 20:00?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Where was
+                      <span class="exx__color-incidental">I </span>
+                      eating sweets yesterday from 6 to 8 pm?
+                    </p>
+                    <p class="exx__txt-translation">Де я їв солодощі вчора з 18:00 до 20:00?</p>
+                  </div>
+                </div>
+
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We </span>
+                      were eating sweets yesterday from 6 to 8 pm.
+                    </p>
+                    <p class="exx__txt-translation">Ми їли солодощі вчора з 18:00 до 20:00.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">We </span>
+                      were not eating sweets yesterday from 6 to 8 pm.
+                    </p>
+                    <p class="exx__txt-translation">Ми не їли солодощів вчора з 18:00 до 20:00.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Were
+                      <span class="exx__color-incidental">we </span>
+                      eating sweets yesterday from 6 to 8 pm?
+                    </p>
+                    <p class="exx__txt-translation">Ми їли солодощі вчора з 18:00 до 20:00?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Where were
+                      <span class="exx__color-incidental">we </span>
+                      eating sweets yesterday from 6 to 8 pm?
+                    </p>
+                    <p class="exx__txt-translation">Де ми їли солодощі вчора з 18:00 до 20:00?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -684,6 +918,40 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      had eaten sweets last summer so I was happy.
+                    </p>
+                    <p class="exx__txt-translation">Я їла солодощі минулого літа, тож була щаслива.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      had not eaten sweets last summer, so I was happy.
+                    </p>
+                    <p class="exx__txt-translation">Я не їла солодощів минулого літа, тому була щаслива.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Had
+                      <span class="exx__color-incidental">I </span>
+                      eaten sweets last summer and was I happy?
+                    </p>
+                    <p class="exx__txt-translation">Я їла солодощі минулого літа і була щаслива?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Where had
+                      <span class="exx__color-incidental">I </span>
+                      eaten sweets last summer and I was happy?
+                    </p>
+                    <p class="exx__txt-translation">Де я їла солодощі минулого літа і була щаслива?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -712,6 +980,40 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      had been working for an hour when he came.
+                    </p>
+                    <p class="exx__txt-translation">Я пропрацював з годину до того, як він прийшов.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      hadn't been working for an hour when he came.
+                    </p>
+                    <p class="exx__txt-translation">Я не пропрацював з (цілу) годину, коли він прийшов.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Had
+                      <span class="exx__color-incidental">I </span>
+                      been working for an hour when he came?
+                    </p>
+                    <p class="exx__txt-translation">Я вже пропрацював з (цілу) годину, коли він прийшов?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Where had
+                      <span class="exx__color-incidental">I </span>
+                      been working for an hour when he came?
+                    </p>
+                    <p class="exx__txt-translation">Де я працював цілу годину, коли він прийшов?</p>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
 
@@ -848,7 +1150,7 @@ export default {
       allowInitResize: true,
       wrapTableClass: "",
       resizeTimeoutID: null,
-      activeDialog: false,
+      activeDialog: true,
     };
   },
   mounted() {
@@ -927,7 +1229,7 @@ li {
   border-bottom: 1px solid;
   overflow: auto;
   max-width: fit-content;
-
+  max-height: 90vh;
   scrollbar-width: thin;
   scrollbar-color: #ccc rgb(241, 239, 239);
 
