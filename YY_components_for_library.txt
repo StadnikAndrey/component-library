@@ -17,7 +17,6 @@ Functionality:
 
 - Tooltip when clicking on the question mark icon (example: Medusa) 
 - Tree (in Table)
-- Filter with animation on JS
 - Timeline
 - Buttons "gamburger" with animation 
 - Pagination
@@ -37,5 +36,4 @@ Functionality:
 - Notifications (example: Slack)   
 - Select with search
 - Tabs 
-- Drag&Drop 
-- Custom scrollbar        
+- Drag&Drop        
