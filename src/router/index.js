@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/countdown-timer',
-    name: 'CountdownTimer',     
+    name: 'CountdownTimer',
     component: () => import('../views/CountdownTimer.vue')
   },
   {

@@ -43,28 +43,32 @@ export default {
   background-color: rgba(#000, 0.6);
   display: flex;
   align-items: center;
-  justify-content: center;   
+  justify-content: center;
   opacity: 0;
-  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);   
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: z-index, opacity;
-  &--active {    
+
+  &--active {
     z-index: 9999;
     opacity: 1;
+
     & .dialog__content {
       opacity: 1;
       transition-duration: .2s;
     }
   }
+
   &__content {
     background-color: #fff;
     padding: 10px;
     max-width: 98%;
     max-height: 98%;
     overflow-y: auto;
-    opacity: 0;    
+    opacity: 0;
     transition: opacity .15s cubic-bezier(0.25, 0.8, 0.25, 1);
-    will-change: opacity;     
+    will-change: opacity;
   }
+
   &__btn-close {
     background-color: royalblue;
     color: #fff;

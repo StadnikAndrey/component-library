@@ -17,7 +17,7 @@
       <span class="counter__value">{{ seconds }}</span>
       <span class="counter__value-name">{{ secondsName }}</span>
     </div>
-  </div>   
+  </div>
 </template>
 
 <script>
@@ -41,7 +41,7 @@ export default {
     this.counter(endWeekDate);
   },
   methods: {
-    counter(finalDate) {      
+    counter(finalDate) {
       let time = "";
       let seconds = "";
       let minutes = "";
@@ -125,7 +125,7 @@ export default {
       let quantitiDayEndWeek = 8 - numberDay;
       let dateEndWeek = now.setDate(now.getDate() + quantitiDayEndWeek);
       let finalDate = new Date(new Date(dateEndWeek).setHours(0, 0, 0));
-      return finalDate;       
+      return finalDate;
     },
   },
 };
@@ -135,12 +135,14 @@ export default {
 .counter {
   display: flex;
   gap: 20px;
+
   &__value {
     margin-right: 5px;
   }
 }
-.countdowntimer-title{
+
+.countdowntimer-title {
   font-weight: bold;
   margin-bottom: 10px;
-} 
+}
 </style>

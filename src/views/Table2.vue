@@ -18,7 +18,7 @@
     </ul>
   </div>
 
-  <button type="button" @click="showDialog">show table Tenses in English</button>
+  <button class="btn-show-table" type="button" @click="showDialog">show table Tenses in English</button>
 
   <Dialog :active="activeDialog" @active="closeDialog">
     <h2 class="table-title">Tenses in English</h2>
@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-if="false">
+          <tr>
             <td scope="row">Present</td>
             <td>
               <table class="table table__in-td">
@@ -1046,6 +1046,40 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">You </span>
+                      will work tomorrow.
+                    </p>
+                    <p class="exx__txt-translation">Ви будете працювати завтра.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">You </span>
+                      won't work tomorrow.
+                    </p>
+                    <p class="exx__txt-translation">Ви не будете працювати завтра.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Will
+                      <span class="exx__color-incidental">you </span>
+                      work tomorrow?
+                    </p>
+                    <p class="exx__txt-translation">Ви будете працювати завтра?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Where will
+                      <span class="exx__color-incidental">you </span>
+                      work tomorrow?
+                    </p>
+                    <p class="exx__txt-translation">Де ти працюватимеш завтра?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -1074,6 +1108,40 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">You </span>
+                      will be working at eight o'clock.
+                    </p>
+                    <p class="exx__txt-translation">Ви будете працювати о 8-й годині.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">You </span>
+                      won't be working at eight o'clock.
+                    </p>
+                    <p class="exx__txt-translation">Ви не будете працювати о 8-й годині.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Will
+                      <span class="exx__color-incidental">you </span>
+                      be working at eight o'clock?
+                    </p>
+                    <p class="exx__txt-translation">Ви будете працювати о 8-ій годині?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Where will
+                      <span class="exx__color-incidental">you </span>
+                      be working at eight o'clock?
+                    </p>
+                    <p class="exx__txt-translation">Де ви будете працювати о восьмій годині?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -1102,6 +1170,40 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      will have done this work by 5 o’clock tomorrow.
+                    </p>
+                    <p class="exx__txt-translation">Я виконаю цю роботу до 5-ї години завтра.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      will not have done this work by 5 o’clock tomorrow.
+                    </p>
+                    <p class="exx__txt-translation">Я не виконаю цю роботу до 5-ї години завтра.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Will
+                      <span class="exx__color-incidental">I </span>
+                      have done this work by 5 o’clock tomorrow?
+                    </p>
+                    <p class="exx__txt-translation">Я виконаю цю роботу до 5-ї години завтра?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      What will
+                      <span class="exx__color-incidental">I </span>
+                      have done by 5 o’clock tomorrow?
+                    </p>
+                    <p class="exx__txt-translation">Що я виконаю до 5-ї години завтра?</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
               <table class="table table__in-td">
@@ -1130,6 +1232,43 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="exx">
+                <div class="exx__item">
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      will have been driving for 2 hours before the moment we reach New York.
+                    </p>
+                    <p class="exx__txt-translation">Я буду (вже) їхати дві години до того моменту, коли ми доїдемо до
+                      Нью-Йорка.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      <span class="exx__color-incidental">I </span>
+                      will not have been driving for 2 hours before the moment we reach New York.
+                    </p>
+                    <p class="exx__txt-translation">Я не буду їхати дві години до того моменту, коли ми доїдемо до
+                      Нью-Йорка.</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      Will
+                      <span class="exx__color-incidental">I </span>
+                      have been driving for 2 hours before the moment we reach New York?
+                    </p>
+                    <p class="exx__txt-translation">Чи буду я їхати протягом двох годин до того часу, коли ми доберемося
+                      до Нью-Йорка?</p>
+                  </div>
+                  <div class="exx__item-part">
+                    <p class="exx__txt-original">
+                      How long will
+                      <span class="exx__color-incidental">I </span>
+                      have been driving before the moment we reach New York?
+                    </p>
+                    <p class="exx__txt-translation">Як довго я буду їхати до того моменту як ми досягнемо Нью-Йорка?</p>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -1150,7 +1289,7 @@ export default {
       allowInitResize: true,
       wrapTableClass: "",
       resizeTimeoutID: null,
-      activeDialog: true,
+      activeDialog: false,
     };
   },
   mounted() {
@@ -1193,6 +1332,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 @import "@/assets/css/vars.scss";
 
@@ -1437,8 +1577,6 @@ th[scope="row"]::after {
 }
 
 .exx {
-
-  // padding: 10px 5px;
   &__item {
     padding: 0 5px 5px 5px;
     font-size: 14px;
@@ -1467,5 +1605,12 @@ th[scope="row"]::after {
   &__color-incidental {
     color: #EB4E36;
   }
+}
+
+.btn-show-table {
+  padding: 6px 15px;
+  background-color: #f9f7e8;
+  color: #62BFAD;
+  font-weight: bold;
 }
 </style>

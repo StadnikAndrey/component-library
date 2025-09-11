@@ -1,19 +1,10 @@
 <template>
   <div class="splide-txt">
-    <a
-      class="link"
-      href="https://splidejs.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Official site slider/carousel Splide</a
-    >
+    <a class="link" href="https://splidejs.com/" target="_blank" rel="noopener noreferrer">Official site slider/carousel
+      Splide</a>
   </div>
   <Splide :options="{ rewind: true }" aria-label="My Favorite Images">
-    <SplideSlide
-      class="custom-splide-slide"
-      v-for="(slide, ind) of slides"
-      :key="`${slide.img}_${ind}`"
-    >
+    <SplideSlide class="custom-splide-slide" v-for="(slide, ind) of slides" :key="`${slide.img}_${ind}`">
       <img :src="require('@/assets/img/' + slide.img)" :alt="'Sample' + ind" />
     </SplideSlide>
   </Splide>
@@ -53,8 +44,9 @@ export default {
 
 <style lang="scss">
 .splide-txt {
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
 }
+
 .custom-splide-slide {
   max-height: 450px;
 }

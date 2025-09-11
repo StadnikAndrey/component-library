@@ -1,13 +1,7 @@
 <template>
   <textarea name="" id="" cols="30" rows="10" v-model="json"></textarea>
-  <vue-json-pretty
-    :data="dataJson"
-    :deep="4"
-    :showLength="true"
-    :showLine="true"
-    :showLineNumber="true"
-    :showIcon="true"
-  />
+  <vue-json-pretty :data="dataJson" :deep="4" :showLength="true" :showLine="true" :showLineNumber="true"
+    :showIcon="true" />
 </template>
 
 <script>

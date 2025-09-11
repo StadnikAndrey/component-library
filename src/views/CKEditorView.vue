@@ -2,11 +2,8 @@
   <div class="ckeditor__text">
     <h1>CKEditor - text editor for the site</h1>
     <p>
-      <a
-        class="ckeditor__link"
-        href="https://ckeditor.com/docs/ckeditor5/latest/installation/frameworks/vuejs-v3.html"
-        >Documentation</a
-      >
+      <a class="ckeditor__link"
+        href="https://ckeditor.com/docs/ckeditor5/latest/installation/frameworks/vuejs-v3.html">Documentation</a>
     </p>
   </div>
   <div>
@@ -27,7 +24,7 @@ export default {
   data() {
     return {
       res: " ",
-      editor: ClassicEditor       
+      editor: ClassicEditor
     };
   },
 };
@@ -38,6 +35,7 @@ export default {
   &__text {
     margin-bottom: 15px;
   }
+
   &__link {
     color: cornflowerblue;
     text-decoration: underline;

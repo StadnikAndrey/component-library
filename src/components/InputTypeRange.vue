@@ -1,25 +1,12 @@
 <template>
   <div class="range">
     <div class="range__list">
-      <span
-        v-for="item of datalist.options"
-        :key="item.value"
-        class="range__opt"
-        :class="item.activClass"
+      <span v-for="item of datalist.options" :key="item.value" class="range__opt" :class="item.activClass"
         :style="`--w: ${item.value}; --total: ${datalist.total}; --start: ${datalist.start}; --t: ${datalist.top}`"
-        @click="setValueInput($event, item.value)"
-        >{{ item.value + datalist.unit }}</span
-      >
+        @click="setValueInput($event, item.value)">{{ item.value + datalist.unit }}</span>
     </div>
-    <input
-      class="range__input"
-      type="range"
-      v-model="input.value"
-      :min="input.min"
-      :max="input.max"
-      step=".1"
-      @input="changeValueRange($event)"
-    />
+    <input class="range__input" type="range" v-model="input.value" :min="input.min" :max="input.max" step=".1"
+      @input="changeValueRange($event)" />
   </div>
   <div class="range__res">{{ res }}</div>
 </template>
@@ -127,15 +114,18 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/css/vars.scss";
+
 .range {
   position: relative;
   margin-bottom: 5px;
+
   &__input {
     width: 100%;
     height: 0;
     margin-top: 45px;
     -webkit-appearance: none;
     appearance: none;
+
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 18px;
@@ -149,6 +139,7 @@ export default {
       background-size: cover;
       background-position: center;
     }
+
     &::-moz-range-thumb {
       width: 18px;
       height: 18px;
@@ -160,6 +151,7 @@ export default {
       background-repeat: no-repeat;
       background-size: contain;
     }
+
     &::-ms-thumb {
       width: 18px;
       height: 18px;
@@ -171,28 +163,33 @@ export default {
       background-repeat: no-repeat;
       background-size: contain;
     }
+
     &::-webkit-slider-runnable-track {
       width: 100%;
       height: 1px;
       cursor: pointer;
       background: $grey;
     }
+
     &::-moz-range-track {
       width: 100%;
       height: 1px;
       cursor: pointer;
       background: $grey;
     }
+
     &::-ms-track {
       width: 100%;
       height: 1px;
       cursor: pointer;
       background: $grey;
     }
+
     &:focus {
       background: none;
       outline: none;
     }
+
     &::-ms-track {
       width: 100%;
       height: 1px;
@@ -200,32 +197,38 @@ export default {
       background: $grey;
     }
   }
+
   &__list {
     position: relative;
     display: block;
   }
+
   &__opt {
     position: absolute;
     top: 0;
-    left: calc(
-      ((var(--w) - var(--start)) / (var(--total) - var(--start))) * 100%
-    );
+    left: calc(((var(--w) - var(--start)) / (var(--total) - var(--start))) * 100%);
     right: auto;
+
     &:not(.range__opt:first-child, .range__opt:last-child) {
       transform: translateX(-50%);
     }
+
     &:last-child {
       transform: translateX(-100%);
     }
+
     &:nth-child(even) {
       top: var(--t);
     }
+
     color: #e6e6e6;
     font-size: 17px;
+
     &:hover {
       cursor: pointer;
     }
   }
+
   &__opt--opted {
     color: var(--color-secondary);
     font-size: 21px;
